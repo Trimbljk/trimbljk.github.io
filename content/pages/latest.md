@@ -1,5 +1,6 @@
-title: Testing
-Date: 2020-05-03
-Slug: home-page
+Title: Home
+Slug: index
+Date: 20200302
+Template: index
 
-Trying to get page to render
+Here is the homepage

@@ -31,16 +31,26 @@
         </header>
 	<main class="grid-container">
 		<div id="item-a"><div>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="https://trimbljk.github.io/first-program.html" rel="bookmark" title="Permalink to first-program-article">first-program-article</a></h2> </header>
+<!--        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="{ SITEURL }}/{ article.url }}" rel="bookmark" title="Permalink to { article.title|striptags }}">{ article.title }</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2020-05-03T00:00:00-04:00"> Sun 03 May 2020 </time>
+                    <time class="published" datetime="{ article.date.isoformat() }}"> { article.locale_date }} </time>
                     <address class="vcard author">By
-                        <a class="url fn" href="https://trimbljk.github.io/author/jake-trimble.html">Jake Trimble</a>
+                    % for author in article.authors %}
+                        <a class="url fn" href="{ SITEURL }}/{ author.url }}">{ author }}</a>
+                    % endfor %}
                     </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Here is some program content.</p> </div><!-- /.entry-content -->
-        </article></li>
+                </footer>
+		<div class="entry-content"> { article.summary }} </div>--> 
+	<h4>RECENT POSTS</h4>
+<ul id="recent-posts">
+    <li>
+      <a href="https://trimbljk.github.io/first-musing.html">Musing-Test</a>
+    </li>
+    <li>
+      <a href="https://trimbljk.github.io/first-program.html">first-program-article</a>
+    </li>
+</ul>
 </div>
 </div>
 		<div id="item-b"><ul>

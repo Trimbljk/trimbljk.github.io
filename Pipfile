@@ -6,8 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-pelican = "*"
 markdown = "*"
+pelican = "*"
 
 [requires]
 python_version = "3.7"

@@ -20,6 +20,7 @@
 {% if loop.index <= 3 and loop.index != 1 %}
 <div>
 	<a href="{{ SITEURL }}/{{ l.url }}">{{ l.title }}</a>
+	{{ l.summary }}
 </div> 
 {% endif %}
 {% endfor %}
@@ -27,8 +28,9 @@
 {% endblock %}
 {% block aside %}
 <h4>Other News</h4>
+{% for lt, u in LINKS %}
 <ul>
-	<li><a href="#">Latest</a></li>
-	<li><a href="#">Older</a></li>
+	<li><a href="{{ u }}">{{ lt }}</a></li>
 </ul>
+{% endfor %}
 {% endblock %}

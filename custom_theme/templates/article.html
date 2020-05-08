@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Latest{% endblock %}
+{% block title %}{{article.slug}}{% endblock %}
 {% block head %}
 	{{ super() }}
 {% endblock %}
@@ -9,8 +9,4 @@
 </div>
 {% endblock %}
 {% block aside %}
-<ul>
-	<li><a href="#">Latest</a></li>
-	<li><a href="#">Older</a></li>
-</ul>
 {% endblock %}

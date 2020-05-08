@@ -23,13 +23,13 @@
 			</ul>
 		</div> 
 		<nav>
-		    {% for u, item in MENUITEMS %}
-		    <a href="{{ item }}" class="nav-links">{{ u }}</a>
-		    {% endfor %}
-		    {% if DISPLAY_CATEGORIES_ON_MENU %}
-		    	{% for cat, null in categories %}
-            		<li{% if cat == category %} class="active"{% endif %} class="favi-list"><a href="{{ SITEURL }}				/{{ cat.url }}" class="nav-links">{{ cat }}</a></li>
+			{% for u, item in MENUITEMS %}
+			<a href="{{ item }}" class="nav-links">{{ u }}</a>
 			{% endfor %}
+			{% if DISPLAY_CATEGORIES_ON_MENU %}
+				{% for cat, null in categories %}
+				<li class="favi-list"><a href="{{ SITEURL }}/{{ cat.url }}" class="nav-links">{{ cat }}</a></li>
+				{% endfor %}
 			{% endif %}
             	</nav>
         </header>

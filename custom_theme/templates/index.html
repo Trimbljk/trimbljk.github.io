@@ -5,31 +5,28 @@
 {% endblock %}
 {% block content %}
 <div>
-<!--        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="{ SITEURL }}/{ article.url }}" rel="bookmark" title="Permalink to { article.title|striptags }}">{ article.title }</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="{ article.date.isoformat() }}"> { article.locale_date }} </time>
-                    <address class="vcard author">By
-                    % for author in article.authors %}
-                        <a class="url fn" href="{ SITEURL }}/{ author.url }}">{ author }}</a>
-                    % endfor %}
-                    </address>
-                </footer>
-		<div class="entry-content"> { article.summary }} </div>--> 
-	<h4>RECENT POSTS</h4>
-{% set recent = articles if not all_articles else all_articles %}
-<ul id="recent-posts">
-{% for a in recent %}
-  {% if loop.index <= 2 %}
-    <li>
-      <a href="{{ SITEURL }}/{{ a.url }}">{{ a.title }}</a>
-    </li>
-  {% endif %}
+{% set latest = articles if not all_articles else all_articles %}
+{% for l in latest %}
+{% if loop.index == 1  %}
+<div>
+	<h4>Latest</h4>
+	<a href="{{ SITEURL }}/{{ l.url }}">{{ l.title }}</a>
+	{{ l.summary }}
+</div>
+{% endif %}
 {% endfor %}
-</ul>
+	<h4>Recent</h4>
+{% for l in latest %}
+{% if loop.index <= 3 and loop.index != 1 %}
+<div>
+	<a href="{{ SITEURL }}/{{ l.url }}">{{ l.title }}</a>
+</div> 
+{% endif %}
+{% endfor %}
 </div>
 {% endblock %}
 {% block aside %}
+<h4>Other News</h4>
 <ul>
 	<li><a href="#">Latest</a></li>
 	<li><a href="#">Older</a></li>

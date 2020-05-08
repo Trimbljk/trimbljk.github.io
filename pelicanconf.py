@@ -28,8 +28,9 @@ SOCIAL = (('Github', 'https://github.com/Trimbljk/'),
          ('LinkedIn', 'https://www.linkedin.com/in/jake-trimble/'),
          ('Twitter', 'http://jinja.pocoo.org/'),)
 
-LINKS = () 
-
+LINKS = (('Check This Out', 'https://www.espn.com'),
+         ('Testing', 'https://www.espn.com'),
+         ('Check This Out', 'https://www.espn.com'))
 DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing

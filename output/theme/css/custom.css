@@ -5,9 +5,9 @@ body {
 	margin-left: 15%;
 	margin-right: 15%;
 	padding-top: 0px;
+	font-family: geneva;
 }
 .header {
-	position: sticky;
 	margin: 0px;
 	font-family: geneva;
 }
@@ -21,9 +21,9 @@ body {
 	margin-right: 15%;
 }
 #top-title {
-    	font-family: cursive;
-    	font-size: 45px;
-    	color: #73000A;
+	font-family: cursive;
+	font-size: 45px;
+	color: #73000A;
 	margin-top: 0px;
 	margin-bottom:0px;
 }
@@ -57,10 +57,7 @@ a.nav-links:link{
 	box-sizing: border-box;
 	color: white;
 	background-color: #73000A;
-	border-style: solid;
-	border-width: 1px;
 	border-radius: 5px;
-	border-color: black;
 	padding-left: 2px;	
 	padding-right: 2px;
 	padding-top: 5px;
@@ -83,9 +80,6 @@ a.nav-links:hover{
 	margin-right: 10px;
 	box-sizing: border-box;
 	color: #73002A;
-	border-style: solid;
-	border-color: #73000A;
-	border-width: 1px;
 	border-radius: 5px;
 	padding-left: 2px;	
 	padding-right: 2px;
@@ -102,6 +96,12 @@ a.nav-links:hover{
 	grid-gap: 6px;
 	grid-template-rows: 1fr 1fr 1fr;
 }
+.indexhead4{
+	color: #474747;
+	font-size: 20px;
+	text-align: center;
+
+}
 #item-a {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -111,4 +111,8 @@ a.nav-links:hover{
 	grid-column-start: 2;
 	grid-column-end: 3;
 	background-color: orange;
+}
+.recents{
+	background-color: grey;
+	display: inline;
 }

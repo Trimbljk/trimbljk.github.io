@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Jake Trimble'
 SITENAME = 'jakes_blog'
-SITEURL = 'https://trimbljk.github.io'
+SITEURL = ''#'https://trimbljk.github.io'
 DIRECT_TEMPLATES = ['categories', 'index']
 PATH = 'content'
 THEME = 'custom_theme'
@@ -17,6 +17,7 @@ MENUITEMS = (('Home', '#'),
         )
 INDEX_SAVE_AS = 'all/blogroll.html'
 ARTICLE_SAVE_AS = 'category/posts/{slug}.html'
+SUMMARY_MAX_LENGTH = 15
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

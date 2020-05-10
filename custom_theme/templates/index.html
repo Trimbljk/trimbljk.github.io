@@ -5,27 +5,22 @@
 	<link rel="stylesheet" href='theme/css/custom.css'>
 {% endblock %}
 {% block content %}
-<div style="background-color: blue">
+<!--% set latest = articles if not all_articles else all_articles %-->
+	<h4 style="background-color: green;"class="indexhead4">Latest</h4>
 {% set latest = articles if not all_articles else all_articles %}
-	<h4 class="indexhead4">Latest</h4>
 {% for l in latest %}
 {% if loop.index == 1  %}
-<div style="background-color: red">
 	<a href="{{ SITEURL }}/{{ l.url }}">{{ l.title }}</a>
 	{{ l.summary }}
-</div>
 {% endif %}
 {% endfor %}
 	<h4 class="indexhead4">Recent</h4>
 {% for l in latest %}
 {% if loop.index <= 3 and loop.index != 1 %}
-<div class="recents">
 	<a href="{{ SITEURL }}/{{ l.url }}" class="recents">{{ l.title }}</a>
 	{{ l.summary }}
-</div> 
 {% endif %}
 {% endfor %}
-</div>
 {% endblock %}
 {% block aside %}
 <h4>Other News</h4>

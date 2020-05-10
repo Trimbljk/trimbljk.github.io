@@ -46,7 +46,7 @@ nav{
 	background-color: black;
 }
 a.nav-links:link{
-	display: inline-flex;
+	display: inline;
 	justify-content: center;
 	font-size: 20px;
 	text-decoration-line: none;
@@ -71,7 +71,6 @@ a.nav-links:visited{
 }
 
 a.nav-links:hover{
-	display: inline-flex;
 	justify-content: center;
 	font-size: 20px;
 	margin-bottom: 15px;

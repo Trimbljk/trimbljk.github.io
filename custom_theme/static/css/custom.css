@@ -39,22 +39,23 @@ body {
 }
 nav{
 	text-align: center;
-	justify-content: center;
 	margin-bottom: 10px;
 	align-content: center;
 	box-sizing: border-box;
 	background-color: black;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 a.nav-links:link{
-	display: inline;
-	justify-content: center;
+	box-sizing: border-box;
+	display: inline-flex;
 	font-size: 20px;
+	justify-content: center;
 	text-decoration-line: none;
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 	margin-left: 10px;
 	margin-right: 10px;
-	box-sizing: border-box;
 	color: white;
 	background-color: #73000A;
 	border-radius: 5px;
@@ -62,8 +63,8 @@ a.nav-links:link{
 	padding-right: 2px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	min-width: 150px;
 	transition: background-color .4s;
+	width: 150px
 }
 a.nav-links:visited{
 	color: white;
@@ -73,8 +74,8 @@ a.nav-links:visited{
 a.nav-links:hover{
 	justify-content: center;
 	font-size: 20px;
-	margin-bottom: 15px;
-	margin-top: 15px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 	margin-left: 10px;
 	margin-right: 10px;
 	box-sizing: border-box;
@@ -86,7 +87,6 @@ a.nav-links:hover{
 	padding-bottom: 5px;
 	text-decoration: none;
 	background-color: white;
-	min-width: 150px;
 }
 /* Main Index Container CSS */
 .grid-container{

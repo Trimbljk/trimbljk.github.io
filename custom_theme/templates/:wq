@@ -20,8 +20,8 @@
 <div class="recents">
 	<a href="{{ SITEURL }}/{{ l.url }}" class='testing'>
 		<div>
-			<h4 class='headtest'>{{ l.title }}</h4>
-			{{ l.summary }}
+	
+			<h4 class='headtest'>{{ l.title }}</h4>{{ l.summary }}
 		</div>
 	</a>
 </div>

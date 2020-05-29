@@ -123,7 +123,7 @@ a.testing:link{
 	height: 200px;
 	border-radius: 5px;
 }
-a.testing:link div > .headtest{
+a.testing:link div:nth-child(1){
 	color: red;
 }
 a.testing:hover{

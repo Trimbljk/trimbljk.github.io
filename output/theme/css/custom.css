@@ -112,6 +112,26 @@ a.nav-links:hover{
 	background-color: orange;
 }
 .recents{
+	display: inline-flex;
+}
+a.testing:link{
+	color: white;
+	text-decoration: none;
 	background-color: grey;
-	display: inline;
+	text-align: center;
+	width: 300px;
+	height: 200px;
+	border-radius: 5px;
+}
+a.testing:link div > .headtest{
+	color: red;
+}
+a.testing:hover{
+	color: green;
+	text-decoration: none;
+	background-color: white;
+	text-align: center;
+	width: 300px;
+	height: 200px;
+	border-radius: 5px;
 }

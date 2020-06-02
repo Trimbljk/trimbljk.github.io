@@ -10,7 +10,7 @@
 <div class="recents">
 {% for l in latest %}
 {% if loop.index <= 1 %}
-	<a href="{{ SITEURL }}/{{ l.url }}" class="testing" style="width: 80%">
+	<a href="{{ SITEURL }}/{{ l.url }}" class="testing" id="linktest">
 		<div>
 			<h4 class="headtest">{{ l.title }}</h4>
 			{{ l.summary }}
@@ -34,9 +34,9 @@
 </div>
 {% endblock %}
 {% block aside %}
-<h4>Other News</h4>
+<h4 class="asidehead">Articles of Interest</h4>
 {% for lt, u in LINKS %}
-<ul>
+<ul style="margin-left: 5px;">
 	<li><a href="{{ u }}">{{ lt }}</a></li>
 </ul>
 {% endfor %}

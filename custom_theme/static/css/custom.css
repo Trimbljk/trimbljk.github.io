@@ -142,8 +142,19 @@ a.testing:link div > .headtest{
 	color: #73000A;
 	font-size: 28px;
 }
-a.testing:hover div > .headtest{
-	color: grey;
+a.testing:visited{
+	color: black;
+	text-decoration: none;
+	background-color: #fafafa;
+	text-align: center;
+	width: 300px;
+	min-height: 200px;
+	padding: 5px;
+	margin: 5px;
+	box-shadow: -1px 1px 1px;
+}
+a.testing:visited div > .headtest{
+	color: #73000A;
 	font-size: 28px;
 }
 a.testing:hover{
@@ -154,6 +165,10 @@ a.testing:hover{
 	text-align: center;
 	transform: scale(0.95);
 	transition-duration: 0.3s;
+}
+a.testing:hover div > .headtest{
+	color: grey;
+	font-size: 28px;
 }
 #linktest{
 	width: 80%;

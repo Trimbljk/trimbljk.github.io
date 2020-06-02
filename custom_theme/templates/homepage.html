@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href='theme/css/custom.css'>
 {% endblock %}
 {% block content %}
+<div id="item-a">
 {% set latest = articles if not all_articles else all_articles %}
 <h4 class="homepageh4">Latest Post</h4>
 <div class="recents">
@@ -32,12 +33,13 @@
 {% endif %}
 {% endfor %}
 </div>
-{% endblock %}
-{% block aside %}
+</div>
+<div id="item-b">
 <h4 class="asidehead">Articles of Interest</h4>
 {% for lt, u in LINKS %}
 <ul style="margin-left: 5px;">
 	<li><a href="{{ u }}">{{ lt }}</a></li>
 </ul>
 {% endfor %}
+</div>
 {% endblock %}

@@ -7,10 +7,10 @@
 {% block content %}
 {% set latest = articles if not all_articles else all_articles %}
 <h4 class="homepageh4">Latest Post</h4>
-<div class="recents" >
+<div class="recents">
 {% for l in latest %}
 {% if loop.index <= 1 %}
-	<a href="{{ SITEURL }}/{{ l.url }}" class="testing">
+	<a href="{{ SITEURL }}/{{ l.url }}" class="testing" style="width: 80%">
 		<div>
 			<h4 class="headtest">{{ l.title }}</h4>
 			{{ l.summary }}

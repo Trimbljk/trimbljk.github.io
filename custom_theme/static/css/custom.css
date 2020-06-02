@@ -116,7 +116,9 @@ a.nav-links:hover{
 #item-b {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	background-color: orange;
+	border-left-style: solid;
+	border-left-width: 3px;
+	border-color: #73000A;
 }
 .recents{
 	display: flex;

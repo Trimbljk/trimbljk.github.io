@@ -1,6 +1,6 @@
 /* Template CSS */ 
 body {
-	background-color: #d8d8d8;
+	background-color: #f3f3f3;
 	margin-top: 0px;
 	margin-left: 15%;
 	margin-right: 15%;
@@ -70,7 +70,6 @@ a.nav-links:visited{
 	color: white;
 	background-color: #73000A;
 }
-
 a.nav-links:hover{
 	justify-content: center;
 	font-size: 20px;
@@ -93,25 +92,94 @@ a.nav-links:hover{
 	display: grid;
 	grid-template-columns: 75% auto;
 	grid-gap: 6px;
-	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	margin-bottom: 10px;
 }
-.indexhead4{
+.homepageh4{
 	color: #474747;
-	font-size: 20px;
-	text-align: center;
-
+	font-size: 34px;
+	text-align: left;
+	padding-left: 10px;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: #73000A;
+	margin-left: 0px;
+	margin-right: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 #item-a {
 	grid-column-start: 1;
 	grid-column-end: 2;
-	justify-self: center;
+	margin-right: 10px;
 }
 #item-b {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	background-color: orange;
+	border-left-style: solid;
+	border-left-width: 3px;
+	border-color: #73000A;
+	margin-top: 5px;
 }
 .recents{
-	background-color: grey;
-	display: inline;
+	display: flex;
+	justify-content: center;
+	padding: 3px;
+	flex-flow: wrap;
+}
+a.testing:link{
+	color: black;
+	text-decoration: none;
+	background-color: #fafafa;
+	text-align: center;
+	width: 300px;
+	min-height: 200px;
+	padding: 5px;
+	margin: 5px;
+	box-shadow: -1px 1px 1px;
+}
+a.testing:link div > .headtest{
+	color: #73000A;
+	font-size: 28px;
+}
+a.testing:hover div > .headtest{
+	color: grey;
+	font-size: 28px;
+}
+a.testing:hover{
+	color: grey;
+	text-decoration: none;
+	background-color: #73000A;
+	opacity: 0.3;
+	text-align: center;
+	transform: scale(0.95);
+	transition-duration: 0.3s;
+}
+#linktest{
+	width: 80%;
+}
+img:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -1px) rotate(-1deg); }
+  20% { transform: translate(-1px, 0px) rotate(1deg); }
+  30% { transform: translate(1px, 1px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 1px) rotate(-1deg); }
+  60% { transform: translate(-1px, 1px) rotate(0deg); }
+  70% { transform: translate(1px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 1px) rotate(0deg); }
+  100% { transform: translate(1px, -1px) rotate(-1deg); }
+}
+.asidehead{
+	font-size: 15;
+	text-align: center;
+	color: #73000A;
 }

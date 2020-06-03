@@ -2,18 +2,55 @@
 body {
 	background-color: #f3f3f3;
 	margin-top: 0px;
-	margin-left: 15%;
-	margin-right: 15%;
+	margin-left: 22%;
+	margin-right: 22%;
 	padding-top: 0px;
 	font-family: geneva;
 }
-@media only screen and (max-width: 1000px) {
+/* settings for media queries */
+@media only screen and (max-width: 2400px) {
+	body {
+		margin-top: 0px;
+		margin-left: 18%;
+		margin-right: 18%;
+	}
+}
+@media only screen and (max-width: 2200px) {
+	body {
+		margin-top: 0px;
+		margin-left: 14%;
+		margin-right: 14%;
+	}
+}
+@media only screen and (max-width: 2000px) {
+	body {
+		margin-top: 0px;
+		margin-left: 12%;
+		margin-right: 12%;
+	}
+}
+@media only screen and (max-width: 1800px) {
+	body {
+		margin-top: 0px;
+		margin-left: 8%;
+		margin-right: 8%;
+	}
+}
+@media only screen and (max-width: 1600px) {
+	body {
+		margin-top: 0px;
+		margin-left: 4%;
+		margin-right: 4%;
+	}
+}
+@media only screen and (max-width: 1400px) {
 	body {
 		margin-top: 0px;
 		margin-left: 0px;
 		margin-right: 0px;
 	}
 }
+
 .header {
 	margin: 0px;
 	font-family: geneva;
@@ -33,6 +70,7 @@ body {
 	color: #73000A;
 	margin-top: 0px;
 	margin-bottom:0px;
+	text-align: center;
 }
 @media only screen and (max-width: 1000px) {
 	#top-title {
@@ -79,6 +117,13 @@ a.nav-links:link{
 	transition: background-color .4s;
 	width: 150px
 }
+@media only screen and (max-width: 400px) {
+	a.nav-links:link{
+		font-size: 20px;
+		transition: background-color .4s;
+		width: 200px
+	}
+}
 a.nav-links:visited{
 	color: white;
 	background-color: #73000A;
@@ -121,7 +166,7 @@ a.nav-links:hover{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
 .homepageh4{
 		color: #474747;
 		font-size: 34px;
@@ -150,7 +195,7 @@ a.nav-links:hover{
 	border-color: #73000A;
 	margin-top: 5px;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
 	#item-a{
 		grid-column-start: 1;
 		grid-column-end: 3;

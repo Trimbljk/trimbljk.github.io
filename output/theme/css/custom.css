@@ -7,6 +7,13 @@ body {
 	padding-top: 0px;
 	font-family: geneva;
 }
+@media only screen and (max-width: 1000px) {
+	body {
+		margin-top: 0px;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
 .header {
 	margin: 0px;
 	font-family: geneva;
@@ -26,6 +33,12 @@ body {
 	color: #73000A;
 	margin-top: 0px;
 	margin-bottom:0px;
+}
+@media only screen and (max-width: 1000px) {
+	#top-title {
+		justify-content: center;
+		text-align: center;
+	}
 }
 #social-favi{
 	margin: 0px;
@@ -108,10 +121,33 @@ a.nav-links:hover{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+@media only screen and (max-width: 1000px) {
+.homepageh4{
+		color: #474747;
+		font-size: 34px;
+		text-align: center;
+		padding-left: 0px;
+		border-bottom-style: solid;
+		border-bottom-width: 3px;
+		border-bottom-color: #73000A;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+}
 #item-a {
 	grid-column-start: 1;
 	grid-column-end: 2;
 	margin-right: 10px;
+	max-width: 1500px;
+}
+@media only screen and (max-width: 1000px) {
+	#item-a{
+		grid-column-start: 1;
+		grid-column-end: 3;
+		margin-right: 0px;
+	}
 }
 #item-b {
 	grid-column-start: 2;
@@ -120,6 +156,25 @@ a.nav-links:hover{
 	border-left-width: 3px;
 	border-color: #73000A;
 	margin-top: 5px;
+}
+@media only screen and (max-width: 1000px) {
+	#item-a{
+		grid-column-start: 1;
+		grid-column-end: 3;
+		margin-right: 0px;
+	}
+	#item-b{
+		grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 2;
+		border-left-style: none;
+		border-left-width: 0px;
+		border-color: #73000A;
+		margin-top: 0px;
+		border-top-style: solid;
+		border-top-color: #73000A;
+		border-top-width: 3px;
+	}
 }
 .recents{
 	display: flex;

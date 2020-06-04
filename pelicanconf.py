@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Jake Trimble'
 SITENAME = 'jakes_blog'
 SITEURL = ''#'https://trimbljk.github.io'
-DIRECT_TEMPLATES = ['categories', 'index']
+DIRECT_TEMPLATES = ['index']
 PATH = 'content'
 THEME = 'custom_theme'
 TIMEZONE = 'America/New_York'
@@ -20,6 +20,8 @@ ARTICLE_SAVE_AS = 'category/posts/{slug}.html'
 SUMMARY_MAX_LENGTH = 15
 DEFAULT_DATE_FORMAT = '%B %d %Y'
 RELATIVE_URLS = True
+CATEGORY_SAVE_AS = '{slug}.html'
+CATEGORY_URL = 'category/{slug}.html'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

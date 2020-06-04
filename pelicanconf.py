@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Jake Trimble'
 SITENAME = 'jakes_blog'
 SITEURL = ''#'https://trimbljk.github.io'
-DIRECT_TEMPLATES = ['index']
+DIRECT_TEMPLATES = ['index', 'archives']
 PATH = 'content'
 THEME = 'custom_theme'
 TIMEZONE = 'America/New_York'
@@ -14,6 +14,10 @@ DEFAULT_LANG = 'en'
 DELETE_OUTPUT_DIRECTORY = True
 MENUITEMS = (('Home', '#'),
         ('About', '#'),
+        ('Data Science', '#'),
+        ('Programming', '#'),
+        ('Musings', '#'),
+        ('Archives', '#'),
         )
 INDEX_SAVE_AS = 'all/blogroll.html'
 ARTICLE_SAVE_AS = 'category/posts/{slug}.html'
@@ -22,6 +26,7 @@ DEFAULT_DATE_FORMAT = '%B %d %Y'
 RELATIVE_URLS = True
 CATEGORY_SAVE_AS = '{slug}.html'
 CATEGORY_URL = 'category/{slug}.html'
+DISPLAY_CATEGORIES_ON_MENU = False
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

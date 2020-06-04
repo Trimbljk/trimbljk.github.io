@@ -280,7 +280,42 @@ img:hover {
   100% { transform: translate(1px, -1px) rotate(-1deg); }
 }
 .asidehead{
-	font-size: 15;
+	font-size: 20px;
 	text-align: center;
-	color: #73000A;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 5px;
 }
+.list-holder{
+	display: flex;
+	justify-content: center;
+}
+.small-link-list{
+	text-align: left;
+	padding-left: 0px;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 28px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: black;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background-color: #73000A;
+	border-radius: 5px;
+	border: 3px solid white;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: white; 
+	border-radius: 5px;
+	border: 3px solid #73000A;
+}
+

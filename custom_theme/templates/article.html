@@ -2,9 +2,21 @@
 {% block title %}{{article.slug}}{% endblock %}
 {% block head %}
 	{{ super() }}
+	<link rel="stylesheet" type="text/css" href="../../theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="../../theme/images">
 {% endblock %}
 {% block content %}
 <div>
+		{{ article.title }}
+	<time class="published" datetime="{{ article.date.isoformat() }}">
+		{{ article.locale_date }}
+	</time>
+	{% if article.modified %}
+		{{ article.title }}
+	<time class="modified" datetime="{{ article.modified.isoformat() }}">
+		{{ article.locale_date }}
+	</time> 
+	{% endif %}
 	{{ article.content }}
 </div>
 {% endblock %}

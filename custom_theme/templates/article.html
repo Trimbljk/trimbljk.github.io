@@ -4,21 +4,28 @@
 	{{ super() }}
 	<link rel="stylesheet" type="text/css" href="../../theme/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="../../theme/images">
+	<link rel="stylesheet" type="text/css" href="../../theme/css/articles.css">
 {% endblock %}
 {% block content %}
-<div>
+<main class="main-article-content">
+	<div class="article-title">
 		{{ article.title }}
-	<time class="published" datetime="{{ article.date.isoformat() }}">
-		{{ article.locale_date }}
-	</time>
+		<div class="article-date">
+			<time class="published" datetime="{{ article.date.isoformat() }}">
+				{{ article.locale_date }}
+			</time>
+		</div>
 	{% if article.modified %}
 		{{ article.title }}
-	<time class="modified" datetime="{{ article.modified.isoformat() }}">
-		{{ article.locale_date }}
-	</time> 
+		<div class="article-date">
+			<time class="published" datetime="{{ article.date.isoformat() }}">
+				{{ article.locale_date }}
+			</time>
+		</div>
 	{% endif %}
+	</div>
+	<div class="article-content">
 	{{ article.content }}
-</div>
-{% endblock %}
-{% block aside %}
+	</div>
+</main>
 {% endblock %}

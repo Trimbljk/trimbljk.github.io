@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href='theme/css/custom.css'>
 {% endblock %}
 {% block content %}
+<main class="grid-container">
 <div id="item-a">
 {% set latest = articles if not all_articles else all_articles %}
 <h4 class="homepageh4">Latest Post</h4>
@@ -42,4 +43,5 @@
 </ul>
 {% endfor %}
 </div>
+</main>
 {% endblock %}

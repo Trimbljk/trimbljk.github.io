@@ -18,6 +18,8 @@ MENUITEMS = (('Home', '#'),
 INDEX_SAVE_AS = 'all/blogroll.html'
 ARTICLE_SAVE_AS = 'category/posts/{slug}.html'
 SUMMARY_MAX_LENGTH = 15
+DEFAULT_DATE_FORMAT = '%B %d %Y'
+RELATIVE_URLS = True
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

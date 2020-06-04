@@ -36,12 +36,14 @@
 </div>
 </div>
 <div id="item-b">
-<h4 class="asidehead">Articles of Interest</h4>
-{% for lt, u in LINKS %}
-<ul style="margin-left: 5px;">
-	<li><a href="{{ u }}">{{ lt }}</a></li>
-</ul>
-{% endfor %}
+<h4 class="homepageh4 asidehead">Articles of Interest</h4>
+<div class="list-holder">
+	<ul class="small-link-list">
+		{% for lt, u in LINKS %}
+		<li><a href="{{ u }}" class="inlinelink">{{ lt }}</a></li>
+		{% endfor %}
+	</ul>
+</div>
 </div>
 </main>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Archives{% endblock %}
+{% block head %}
+	{{ super() }}
+	<link rel="stylesheet" type="text/css" href="../../theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="../../theme/images">
+	<link rel="stylesheet" type="text/css" href="../../theme/css/articles.css">
+	<link rel="stylesheet" type="text/css" href="theme/css/articles.css">
+{% endblock %}
+	{% block content %}
+		<main class="main-article-content">
+			<div class="article-title">
+				<h4 class="homepageh4 archive-header">Archives</h4>
+			</div>
+			<div style="display: flex; justify-content: center;">
+			<ul style="list-style-type: none; text-align: left">
+			{% for article in dates %}
+			<li>{{ article.locale_date }} - <a href="{{ SITEURL }}/{{ article.url }}" class="inlinelink">{{ article.title }}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</main>
+{% endblock %}

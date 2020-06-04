@@ -37,4 +37,9 @@ a.inlinelink:hover{
 	border-radius: 3px;
 	transition: 0.3s;
 }
-
+.archive-header{
+	text-align: center;
+	padding-left: 0px;
+	margin-left: 25%;
+	margin-right: 25%;
+}

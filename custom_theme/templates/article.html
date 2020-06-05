@@ -15,7 +15,7 @@
 				{{ article.locale_date }}
 			</time>
 		</div>
-	{% if article.modified %}
+		{% if article.modified %}
 		{{ article.title }}
 		<div class="article-date">
 			<time class="published" datetime="{{ article.date.isoformat() }}">

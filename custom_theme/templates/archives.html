@@ -7,8 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="../../theme/css/articles.css">
 	<link rel="stylesheet" type="text/css" href="theme/css/articles.css">
 {% endblock %}
-	{% block content %}
-		<main class="main-article-content">
+{% block content %}
+	<main class="main-article-content">
+		<div class="paper-shadowing">
 			<div class="article-title">
 				<h4 class="homepageh4 archive-header">Archives</h4>
 			</div>
@@ -19,5 +20,6 @@
 			{% endfor %}
 			</ul>
 			</div>
-		</main>
+		</div>
+	</main>
 {% endblock %}

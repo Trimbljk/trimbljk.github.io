@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="{{ SITE_URL }}{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}">
 	<link rel="stylesheet" type="text/css" href="{{ SITE_URL }}{{ THEME_STATIC_DIR }}/css/articles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  	<title>{% block title %}{% endblock %}</title>
  	{% endblock %}
 </head>
@@ -33,10 +34,13 @@
             	</nav>
         </header>
 	{% block content %}{% endblock %}
-	<footer>
-		<address>                                             
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                </address><!-- /#about -->
+	<footer style="display: flex; justify-content: space-between;">
+		<div>Copyright © 2020 Jake Trimble</div>
+		<div style="display: flex;">
+		<address style="padding-right: 3px; margin-right: 3px; border-right-style: solid; border-right-color: #73000A; border-right-width: 2px;">
+			Proudly powered by Pelican</address><!-- /#about -->
+		<div>Theme by <a href="https://github.com/Trimbljk">@trimbljk</a></div>
+		</div>
 	</footer>
 </body>
 </html>

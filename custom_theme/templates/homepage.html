@@ -62,14 +62,14 @@
 </div>
 </div>
 <div id="item-b">
-<h4 class="homepageh4 asidehead">Articles of Interest</h4>
-<div class="list-holder">
-	<ul class="small-link-list">
-		{% for lt, u in LINKS %}
-		<li><a href="{{ u }}" class="inlinelink">{{ lt }}</a></li>
-		{% endfor %}
-	</ul>
-</div>
-</div>
+	<h4 class="homepageh4 asidehead">Articles of Interest</h4>
+	<div class="list-holder homepage-articles">
+		<ul class="small-link-list">
+			{% for lt, u in LINKS %}
+			<li class="aside-list-items"><a href="{{ u }}" class="inlinelink">{{ lt }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	</div>
 </main>
 {% endblock %}

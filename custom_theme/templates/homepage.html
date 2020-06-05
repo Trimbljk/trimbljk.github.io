@@ -15,6 +15,19 @@
 	<a href="{{ SITEURL }}/{{ l.url }}" class="testing" id="linktest">
 		<div>
 			<h4 class="headtest">{{ l.title }}</h4>
+			<div class="article-date">
+				<time class="published" datetime="{{ l.date.isoformat() }}">
+					{{ l.locale_date }}
+				</time>
+			</div>
+			{% if l.modified %}
+			{{ l.title }}
+			<div class="article-date">
+				<time class="published" datetime="{{ l.date.isoformat() }}">
+					{{ l.locale_date }}
+				</time>
+			</div>
+			{% endif %}
 			{{ l.summary }}
 		</div>
 	</a>
@@ -28,6 +41,19 @@
 	<a href="{{ SITEURL }}/{{ l.url }}" class='testing'>
 		<div>
 			<h4 class='headtest'>{{ l.title }}</h4>
+			<div class="article-date">
+				<time class="published" datetime="{{ l.date.isoformat() }}">
+					{{ l.locale_date }}
+				</time>
+			</div>
+			{% if l.modified %}
+			{{ l.title }}
+			<div class="article-date">
+				<time class="published" datetime="{{ l.date.isoformat() }}">
+					{{ l.locale_date }}
+				</time>
+			</div>
+			{% endif %}
 			{{ l.summary }}
 		</div>
 	</a>

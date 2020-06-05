@@ -5,7 +5,7 @@ body {
 	margin-left: 22%;
 	margin-right: 22%;
 	padding-top: 0px;
-	font-family: geneva;
+	font-family: arial, helvetica, sans-serif;
 }
 /* settings for media queries */
 @media only screen and (max-width: 2400px) {
@@ -151,7 +151,11 @@ a.nav-links:hover{
 	grid-template-columns: 75% auto;
 	grid-gap: 6px;
 	grid-template-rows: 1fr;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 20px;
+	padding-bottom: 20px;
 }
 .homepageh4{
 	color: #474747;
@@ -200,6 +204,7 @@ a.nav-links:hover{
 		grid-column-start: 1;
 		grid-column-end: 3;
 		margin-right: 0px;
+		margin-bottom: 10px;
 	}
 	#item-b{
 		grid-column-start: 1;
@@ -207,11 +212,10 @@ a.nav-links:hover{
 		grid-row-start: 2;
 		border-left-style: none;
 		border-left-width: 0px;
-		border-color: #73000A;
 		margin-top: 0px;
 		border-top-style: solid;
-		border-top-color: #73000A;
-		border-top-width: 3px;
+		border-top-color: black;
+		border-top-width: 20px;
 	}
 }
 .recents{
@@ -248,6 +252,7 @@ a.testing:hover{
 a.testing:link div > .headtest{
 	color: #73000A;
 	font-size: 28px;
+	margin-bottom: 5px;
 }
 a.testing:visited div > .headtest{
 	color: #73000A;
@@ -287,6 +292,11 @@ img:hover {
 	margin-right: 10%;
 	margin-left: 10%;
 	margin-bottom: 5px;
+}
+@media only screen and (max-width: 900px) {
+	.asidehead{
+		margin-top: 50px;
+	}
 }
 .list-holder{
 	display: flex;

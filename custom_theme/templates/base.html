@@ -25,11 +25,6 @@
 			{% for u, item in MENUITEMS %}
 			<a href="{{ item }}" class="nav-links">{{ u }}</a>
 			{% endfor %}
-			{% if DISPLAY_CATEGORIES_ON_MENU %}
-			{% for cat, null in categories %}
-			<a href="{{ SITEURL }}/{{ cat.url }}" class="nav-links">{{ cat }}</a>
-				{% endfor %}
-			{% endif %}
             	</nav>
         </header>
 	{% block content %}{% endblock %}

@@ -315,7 +315,6 @@ img:hover {
 ::-webkit-scrollbar {
 	width: 15px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
 	background: black;
@@ -326,11 +325,23 @@ img:hover {
 	border-radius: 5px;
 	border: 3px solid white;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: white; 
 	border-radius: 5px;
 	border: 3px solid #73000A;
 }
-
+.footer{
+	display: flex; 
+	justify-content: space-between;
+}
+.pelican-info{
+	display: flex;
+}
+.address{
+	padding-right: 3px; 
+	margin-right: 3px; 
+	border-right-style: solid; 
+	border-right-color: #73000A; 
+	border-right-width: 2px;
+}

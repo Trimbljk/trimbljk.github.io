@@ -1,0 +1,78 @@
+.main-article-content{
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 20px;
+	margin-bottom: 20px;
+}
+.paper-shadowing{
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: white;
+	margin-bottom: 20px;
+	color: black;
+	box-shadow: -1px 1px 1px;
+	min-height: 300px;
+}
+@media only screen and (max-width: 1000px) {
+	.paper-shadowing{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+.homepage-articles{
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: white;
+	margin-bottom: 20px;
+	color: #474747;
+	box-shadow: -1px 1px 1px;
+	min-height: 300px;
+}
+@media only screen and (max-width: 900px) {
+	.homepage-articles{
+		margin-left: 20%;
+		margin-right: 20%;
+		background-color: white;
+		margin-bottom: 20px;
+		color: #474747;
+		box-shadow: -1px 1px 1px;
+		min-height: 300px;
+	}
+}
+.article-title{
+	margin-top: 10px;
+	padding-top: 20px;
+	font-size: 35px;
+	text-align: center;
+	color: #73000A;
+}
+.article-date{
+	font-size: 14px;
+}
+.article-content{
+	margin-top: 50px;
+	margin-left: 2%;
+	margin-right: 2%;
+	font-size: 16px;
+	text-indent: 3em;
+}
+a.inlinelink:link{
+	color: #73000A;
+	text-decoration: none;
+}
+a.inlinelink:visited{
+	color: #73000A;
+	opacity: 0.4;
+}
+a.inlinelink:hover{
+	background-color: #73000A;
+	color: white;
+	border-radius: 3px;
+	transition: 0.3s;
+}
+.archive-header{
+	text-align: center;
+	padding-left: 0px;
+	margin-left: 25%;
+	margin-right: 25%;
+}

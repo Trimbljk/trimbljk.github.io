@@ -5,7 +5,7 @@ body {
 	margin-left: 22%;
 	margin-right: 22%;
 	padding-top: 0px;
-	font-family: geneva;
+	font-family: arial, helvetica, sans-serif;
 }
 /* settings for media queries */
 @media only screen and (max-width: 2400px) {
@@ -50,7 +50,6 @@ body {
 		margin-right: 0px;
 	}
 }
-
 .header {
 	margin: 0px;
 	font-family: geneva;
@@ -151,7 +150,11 @@ a.nav-links:hover{
 	grid-template-columns: 75% auto;
 	grid-gap: 6px;
 	grid-template-rows: 1fr;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 20px;
+	padding-bottom: 20px;
 }
 .homepageh4{
 	color: #474747;
@@ -200,6 +203,7 @@ a.nav-links:hover{
 		grid-column-start: 1;
 		grid-column-end: 3;
 		margin-right: 0px;
+		margin-bottom: 10px;
 	}
 	#item-b{
 		grid-column-start: 1;
@@ -207,11 +211,10 @@ a.nav-links:hover{
 		grid-row-start: 2;
 		border-left-style: none;
 		border-left-width: 0px;
-		border-color: #73000A;
 		margin-top: 0px;
 		border-top-style: solid;
-		border-top-color: #73000A;
-		border-top-width: 3px;
+		border-top-color: black;
+		border-top-width: 20px;
 	}
 }
 .recents{
@@ -248,6 +251,7 @@ a.testing:hover{
 a.testing:link div > .headtest{
 	color: #73000A;
 	font-size: 28px;
+	margin-bottom: 5px;
 }
 a.testing:visited div > .headtest{
 	color: #73000A;
@@ -280,7 +284,64 @@ img:hover {
   100% { transform: translate(1px, -1px) rotate(-1deg); }
 }
 .asidehead{
-	font-size: 15;
+	font-size: 20px;
 	text-align: center;
-	color: #73000A;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 18px;
+}
+@media only screen and (max-width: 900px) {
+	.asidehead{
+		margin-top: 50px;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+.list-holder{
+	display: flex;
+	justify-content: center;
+}
+.small-link-list{
+	text-align: left;
+	padding-left: 0px;
+}
+.aside-list-items{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 15px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: black;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background-color: #73000A;
+	border-radius: 5px;
+	border: 3px solid white;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: white; 
+	border-radius: 5px;
+	border: 3px solid #73000A;
+}
+.footer{
+	display: flex; 
+	justify-content: space-between;
+}
+.pelican-info{
+	display: flex;
+}
+.address{
+	padding-right: 3px; 
+	margin-right: 3px; 
+	border-right-style: solid; 
+	border-right-color: #73000A; 
+	border-right-width: 2px;
 }

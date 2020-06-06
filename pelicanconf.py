@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Jake Trimble'
-SITENAME = 'jakes_blog'
-SITEURL = ''#'https://trimbljk.github.io'
+SITENAME = 'Just Another Data Science Blog'
+SITEURL = 'https://trimbljk.github.io'
 DIRECT_TEMPLATES = ['index', 'archives']
 PATH = 'content'
 THEME = 'custom_theme'

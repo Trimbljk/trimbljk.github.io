@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="theme/css/custom.css">
-	<link rel="stylesheet" type="text/css" href="theme/css/articles.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/articles.css">
 	<title>second-musing</title>
 
 </head>
@@ -13,11 +13,11 @@
 			<h1 id=top-title>Just Another Data Science Blog...</h1>
 			<ul id="social-favi">
 				<li class="favi-list">
-					<a href="https://www.github.com/"><img src="theme/images/github-logo.svg" height="45" width="45"></a></li>
+					<a href="https://www.github.com/"><img src="https://trimbljk.github.io/theme/images/github-logo.svg" height="45" width="45"></a></li>
 				<li class="favi-list">
-			<a href="https://www.linkedin.com/in/jake-trimble/"><img src="theme/images/linkedin.svg" height="45" width="45"></a></li>
+			<a href="https://www.linkedin.com/in/jake-trimble/"><img src="https://trimbljk.github.io/theme/images/linkedin.svg" height="45" width="45"></a></li>
 				<li class="favi-list">
-			<a href="https://www.twitter.com/JakeTrimble11/"><img src="theme/images/twitter.svg" height="45" width="45"></a></li>
+			<a href="https://www.twitter.com/JakeTrimble11/"><img src="https://trimbljk.github.io/theme/images/twitter.svg" height="45" width="45"></a></li>
 			</ul>
 		</div> 
 		<nav>

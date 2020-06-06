@@ -12,15 +12,15 @@ TIMEZONE = 'America/New_York'
 CSS_FILE = 'custom.css'
 DEFAULT_LANG = 'en'
 DELETE_OUTPUT_DIRECTORY = True
-MENUITEMS = (('Home', '#'),
-        ('About', '#'),
-        ('Data Science', '#'),
-        ('Programming', '#'),
-        ('Musings', '#'),
-        ('Archives', '#'),
+MENUITEMS = (('Home', 'https://trimbljk.github.io'),
+        ('About', 'https://trimbljk.github.io'),
+        ('Data Science', 'https://trimbljk.github.io/data-science.html'),
+        ('Programming', 'https://trimbljk.github.io/programming.html'),
+        ('Musings', 'https://trimbljk.github.io/musings.html'),
+        ('Archives', 'https://trimbljk.github.io/archives.html'),
         )
 INDEX_SAVE_AS = 'all/blogroll.html'
-ARTICLE_SAVE_AS = 'category/posts/{slug}.html'
+ARTICLE_SAVE_AS = 'posts/{slug}.html'
 SUMMARY_MAX_LENGTH = 15
 DEFAULT_DATE_FORMAT = '%Y-%B-%d'
 RELATIVE_URLS = True

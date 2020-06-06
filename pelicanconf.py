@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Jake Trimble'
 SITENAME = 'Just Another Data Science Blog'
-SITEURL = 'https://trimbljk.github.io'
+SITE_URL = 'https://trimbljk.github.io/'
 DIRECT_TEMPLATES = ['index', 'archives']
 PATH = 'content'
 THEME = 'custom_theme'
@@ -23,7 +23,7 @@ INDEX_SAVE_AS = 'all/blogroll.html'
 ARTICLE_SAVE_AS = 'article/{slug}/index.html'
 SUMMARY_MAX_LENGTH = 15
 DEFAULT_DATE_FORMAT = '%Y-%B-%d'
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 CATEGORY_SAVE_AS = '{slug}.html'
 CATEGORY_URL = 'category/{slug}.html'
 DISPLAY_CATEGORIES_ON_MENU = False

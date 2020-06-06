@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Jake Trimble'
 SITENAME = 'Just Another Data Science Blog'
-SITE_URL = 'https://trimbljk.github.io/'
+SITE_URL = 'https://trimbljk.github.io'
 DIRECT_TEMPLATES = ['index', 'archives']
 PATH = 'content'
 THEME = 'custom_theme'

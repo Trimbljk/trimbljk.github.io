@@ -20,7 +20,7 @@ MENUITEMS = (('Home', 'https://trimbljk.github.io'),
         ('Archives', 'https://trimbljk.github.io/archives.html'),
         )
 INDEX_SAVE_AS = 'all/blogroll.html'
-ARTICLE_SAVE_AS = 'posts/{slug}.html'
+ARTICLE_SAVE_AS = 'article/{slug}/index.html'
 SUMMARY_MAX_LENGTH = 15
 DEFAULT_DATE_FORMAT = '%Y-%B-%d'
 RELATIVE_URLS = True

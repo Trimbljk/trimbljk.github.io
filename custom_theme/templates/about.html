@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<main class="main-article-content">
+	<div class="paper-shadowing">
+		<div class="article-title">
+			<h4 class="section-title archive-header">About</h4>
+		</div>
+		<div class="article-content">
+			{{ page.content }}
+		</div>
+	</div>
+</main>
+{% endblock %}

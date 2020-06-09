@@ -7,7 +7,7 @@
 <main class="grid-container">
 <div id="main-content-section">
 {% set latest = articles if not all_articles else all_articles %}
-<h4 class="section-header">Latest Post</h4>
+<h4 class="section-title">Latest Post</h4>
 <div class="recents">
 {% for l in latest %}
 {% if loop.index <= 1 %}

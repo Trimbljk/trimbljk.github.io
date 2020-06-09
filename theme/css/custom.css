@@ -77,6 +77,7 @@ body {
 		text-align: center;
 	}
 }
+/* Favicon list */
 #social-favi{
 	margin: 0px;
 	margin-top: 5px;
@@ -87,6 +88,7 @@ body {
 	display: inline-flex;
 	margin: 5px;
 }
+/* Navigation bar and links */
 nav{
 	text-align: center;
 	margin-bottom: 10px;
@@ -156,7 +158,7 @@ a.nav-links:hover{
 	border-bottom-width: 20px;
 	padding-bottom: 20px;
 }
-.homepageh4{
+.section-title{
 	color: #474747;
 	font-size: 34px;
 	text-align: left;
@@ -170,7 +172,7 @@ a.nav-links:hover{
 	margin-bottom: 20px;
 }
 @media only screen and (max-width: 900px) {
-.homepageh4{
+.section-title{
 		color: #474747;
 		font-size: 34px;
 		text-align: center;
@@ -184,13 +186,13 @@ a.nav-links:hover{
 		margin-bottom: 5px;
 	}
 }
-#item-a {
+#main-content-section {
 	grid-column-start: 1;
 	grid-column-end: 2;
 	margin-right: 10px;
 	max-width: 1500px;
 }
-#item-b {
+#aside-section{
 	grid-column-start: 2;
 	grid-column-end: 3;
 	border-left-style: solid;
@@ -199,13 +201,13 @@ a.nav-links:hover{
 	margin-top: 5px;
 }
 @media only screen and (max-width: 900px) {
-	#item-a{
+	#main-content-section{
 		grid-column-start: 1;
 		grid-column-end: 3;
 		margin-right: 0px;
 		margin-bottom: 10px;
 	}
-	#item-b{
+	#aside-section{
 		grid-column-start: 1;
 		grid-column-end: 3;
 		grid-row-start: 2;
@@ -223,7 +225,8 @@ a.nav-links:hover{
 	padding: 3px;
 	flex-flow: wrap;
 }
-a.testing:link{
+/* All homepage article links */
+a.article-link:link{
 	color: black;
 	text-decoration: none;
 	background-color: #fafafa;
@@ -234,12 +237,12 @@ a.testing:link{
 	margin: 5px;
 	box-shadow: -1px 1px 1px;
 }
-a.testing:visited{
+a.article-link:visited{
 	color: black;
 	text-decoration: none;
 	background-color: #fafafa;
 }
-a.testing:hover{
+a.article-link:hover{
 	color: grey;
 	text-decoration: none;
 	background-color: #73000A;
@@ -248,21 +251,22 @@ a.testing:hover{
 	transform: scale(0.95);
 	transition-duration: 0.3s;
 }
-a.testing:link div > .headtest{
+a.article-link:link div > .article-link-head{
 	color: #73000A;
 	font-size: 28px;
 	margin-bottom: 5px;
 }
-a.testing:visited div > .headtest{
+a.article-link:visited div > .article-link-head{
 	color: #73000A;
 }
-a.testing:hover div > .headtest{
+a.article-link:hover div > .article-link-head{
 	color: grey;
 	font-size: 28px;
 }
-#linktest{
+#latest-link{
 	width: 80%;
 }
+/* Animation when hovering over favicon list elements */
 img:hover {
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s;
@@ -283,6 +287,7 @@ img:hover {
   90% { transform: translate(1px, 1px) rotate(0deg); }
   100% { transform: translate(1px, -1px) rotate(-1deg); }
 }
+/* Classes associated with the aside */
 .asidehead{
 	font-size: 20px;
 	text-align: center;
@@ -331,6 +336,7 @@ img:hover {
 	border-radius: 5px;
 	border: 3px solid #73000A;
 }
+/* Footer items */
 .footer{
 	display: flex; 
 	justify-content: space-between;

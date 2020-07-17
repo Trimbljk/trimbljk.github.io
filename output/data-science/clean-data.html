@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/articles.css">
+	<title>clean-data</title>
+
+</head>
+<body>
+	<header class="header">			
+		<div class="title-fav">
+			<h1 id=top-title>Just Another Data Science Blog...</h1>
+			<ul id="social-favi">
+				<li class="favi-list">
+					<a href="https://www.github.com/Trimbljk"><img src="https://trimbljk.github.io/theme/images/github-logo.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			<a href="https://www.linkedin.com/in/jake-trimble/"><img src="https://trimbljk.github.io/theme/images/linkedin.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			<a href="https://www.twitter.com/JakeTrimble11/"><img src="https://trimbljk.github.io/theme/images/twitter.svg" height="45" width="45"></a></li>
+			</ul>
+		</div> 
+		<nav>
+			<a href="https://trimbljk.github.io" class="nav-links">Home</a>
+			<a href="https://trimbljk.github.io" class="nav-links">About</a>
+			<a href="https://trimbljk.github.io/data-science.html" class="nav-links">Data Science</a>
+			<a href="https://trimbljk.github.io/programming.html" class="nav-links">Programming</a>
+			<a href="https://trimbljk.github.io/musings.html" class="nav-links">Musings</a>
+			<a href="https://trimbljk.github.io/archives.html" class="nav-links">Archives</a>
+            	</nav>
+        </header>
+<main class="main-article-content">
+	<div class="article-title">
+		Clean Data: Art or Science?
+		<div class="article-date">
+			<time class="published" datetime="2020-07-17T00:00:00-04:00">
+				2020-July-17
+			</time>
+		</div>
+	</div>
+	<div class="article-content">
+	<h2>Clean data: Art or Science?</h2>
+<p>Having a well laid-out method for capturing data in the cleanest possible manner, by that I mean, the steps to capture and record specific kinds of data are documented, standardized and well understood, is crucially important for any downstream application using said data. It's an art that requires much thought and necessitates acceptance that the data will never be perfect. In this post, I'll discuss bad data and what's needed to create good data. </p>
+<p>The data-science team for which I am apart has been cleaning up dirty data at my company and all the work has inspired me to write this blog post. Have you ever started working with data you didn't collect, thinking you could quickly prepare an analysis, only to spend the majority of your time attempting to understand what was captured and ultimately cleaning what's available. I'm sure every data scientist has experienced this. My experience pertains to biological sample collection and microbial metadata.</p>
+<h4>Bad Data</h4>
+<p>Before I break down the following table, I must confess, some of this was my own doing. However, when the dataset moves beyond 100 rows of data and into the thousands, on top of <em>no</em> standardized data collection conventions, this tends to happen. Sadly, I am not a computer because my brain doesn't have a nice CPU to help me out. </p>
+<p>Here is an example of some bad data:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Collaborator</th>
+<th align="left">Organism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NCSU</td>
+<td align="left">Corn</td>
+</tr>
+<tr>
+<td align="left">Louisiana State University</td>
+<td align="left">Lepidopteran</td>
+</tr>
+<tr>
+<td align="left">John Doe</td>
+<td align="left">Cotton Ball</td>
+</tr>
+</tbody>
+</table>
+<h4>Let's Clean It Up</h4>
+<p>First, there are no conventions laying out what each of these column headers mean. This is crucially important as it communicates what is being display and hints at the data types and content that comprises the rows that follow. The headers and data are capitalized and some instances have white space. These features can cause issues when attempting to parse data and columns and datashould be lowercase and whitespace replaced with underscores. Let's take a look at the first column, <strong>Collaborator</strong>. We have two universities, <code>NCSU</code> and <code>Louisiana State University</code>, and a person. If you didn't live in North Carolina, you probably wouldn't associate <code>NCSU</code> with North Carolina State University right off the bat. There are also two different kinds of data here, a person, <code>John Doe</code> and a kind of institution. We can differentiate these two by adding separate columns <strong>collector_type</strong>, <strong>collector_institute</strong> and <strong>collector_name</strong>. We have also introduced the underscore. <strong>Organism</strong> is a little more tricky. What passes for an organism? Would a piece suffice? How about the whole thing? There are also different <code>kinds</code> of data in this column. <code>Corn</code> and <code>Cotton ball</code> are a both plants but <code>Lepidopteran</code> is a taxonomic nomenclature for a particular group of insects. In science, there are particular name conventions or ontologies that are readily accessible for us to use. I'm going to pull a few of those conventions for our <strong>Organism</strong> header. We can use the <a href="https://earthmicrobiome.org/protocols-and-standards/empo/">Earth Microbiome Project Ontology</a> to help us with convention setting. The EMPO has built a nice standardized convention for peices of data. After applying their convention format and adding a little custom touch to the headers we get our new table:  </p>
+<table>
+<thead>
+<tr>
+<th align="left">collaborator_type</th>
+<th align="left">collector_institute</th>
+<th align="left">collector_name</th>
+<th align="left">env_description_level_1</th>
+<th align="left">env_description_level_2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">institute</td>
+<td align="left">north_carolina_state_university</td>
+<td align="left"></td>
+<td align="left">host_associated</td>
+<td align="left">plant</td>
+</tr>
+<tr>
+<td align="left">institute</td>
+<td align="left">louisiana_state_university</td>
+<td align="left"></td>
+<td align="left">host_associated</td>
+<td align="left">animal</td>
+</tr>
+<tr>
+<td align="left">individual</td>
+<td align="left"></td>
+<td align="left">john_doe</td>
+<td align="left">host_associated</td>
+<td align="left">plant</td>
+</tr>
+</tbody>
+</table>
+<p>Obviously we need descriptions for each column header describing the data held within, but the table already looks better. With data formatted the same throughout, it will be much easier to parse. We did introduce some <code>None</code> types in a two columns, but that's the nature of data never being perfect. I encourage you to read <a href="https://vita.had.co.nz/papers/tidy-data.pdf"><em>Tidy Data</em></a> by Hadley Wickham, the Cheif Science Officer for <a href="https://rstudio.com/">RStudio</a>. He discusses how to make data easier and faster to clean. </p>
+	</div>
+</main>
+	<footer class="footer">
+		<div>Copyright © 2020 Jake Trimble</div>
+		<div class="pelican-info">
+		<address class="address">
+			Proudly powered by Pelican
+		</address><!-- /#about -->
+		<div>Theme by <a href="https://github.com/Trimbljk">@trimbljk</a></div>
+		</div>
+	</footer>
+</body>
+</html>

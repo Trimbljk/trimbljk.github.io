@@ -37,11 +37,14 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 SOCIAL = (('Github', 'https://github.com/Trimbljk/'),
          ('LinkedIn', 'https://www.linkedin.com/in/jake-trimble/'),
-         ('Twitter', 'http://jinja.pocoo.org/'),)
+         ('Twitter', 'https://twitter.com/JakeTrimble11'),)
 
-LINKS = (('Check This Out', 'https://www.espn.com'),
-         ('Testing', 'https://www.espn.com'),
-         ('Check This Out', 'https://www.espn.com'))
+LINKS = (
+        ('Data Science Central', 'https://www.datasciencecentral.com/'),
+        ('Tidy Data by Hadley Wickham', 'https://vita.had.co.nz/papers/tidy-data.pdf'),
+        ('Testing', 'https://www.espn.com'),
+        ('Check This Out', 'https://www.espn.com')
+        )
 DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing

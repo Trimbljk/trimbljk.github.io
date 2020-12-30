@@ -11,7 +11,7 @@
 <div class="recents">
 {% for l in latest %}
 {% if loop.index <= 1 %}
-	<a href="{{ SITEURL }}/{{ l.url }}" class="article-link" id="latest-link">
+	<a href="{{ SITE_URL }}/{{ l.url }}" class="article-link" id="latest-link">
 		<div>
 			<h4 class="article-link-head">{{ l.title }}</h4>
 			<div class="article-date">
@@ -37,7 +37,7 @@
 <div class="recents">
 {% for l in latest %}
 {% if loop.index <= 4 and loop.index != 1 %}
-	<a href="{{ SITEURL }}/{{ l.url }}" class='article-link'>
+	<a href="{{ SITE_URL }}/{{ l.url }}" class='article-link'>
 		<div>
 			<h4 class='article-link-head'>{{ l.title }}</h4>
 			<div class="article-date">

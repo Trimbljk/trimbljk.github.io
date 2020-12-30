@@ -12,7 +12,7 @@
 			<div style="display: flex; justify-content: center;">
 			<ul style="list-style-type: none; text-align: left">
 			{% for article in dates %}
-			<li>{{ article.locale_date }} - <a href="{{ SITEURL }}/{{ article.url }}" class="inlinelink">{{ article.title }}</a></li>
+			<li>{{ article.locale_date }} - <a href="{{ SITE_URL }}/{{ article.url }}" class="inlinelink">{{ article.title }}</a></li>
 			{% endfor %}
 			</ul>
 			</div>

@@ -1,8 +1,8 @@
 Title: Parsing the USDA's National Agriculture Statistics Service Data
 Date: 2020-11-23
 Save_as: programming/usda-nass.html
-Slug: parsing-nsaa-data
-url: programming/parsing-nsaa-data
+Slug: usda-nass
+url: programming/usda-nass
 Summary: This is the first post in a series of posts working with the USDA NASS data.
 
 This is the first blog post in what will be a series of posts on retrieving, formatting, querying and visualizing data from the USDA National Agricultural Statistics Service (NSAA). To understand what kinds of data we'll be working with, we can first take a gander over to the NASS quickstats website at [https://quickstats.nass.usda.gov/](https://quickstats.nass.usda.gov/). The homepage brings up a rather innocuous design:

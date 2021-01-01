@@ -76,3 +76,8 @@ a.inlinelink:hover{
 	margin-left: 25%;
 	margin-right: 25%;
 }
+img.articleimg{
+	width: 100%;
+	display: block;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}

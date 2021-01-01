@@ -7,7 +7,7 @@ Summary: This is the first post in a series of posts working with the USDA NASS 
 
 This is the first blog post in what will be a series of posts on retrieving, formatting, querying and visualizing data from the USDA National Agricultural Statistics Service (NASS). To understand what kinds of data we'll be working with, we can take a gander over to the NASS quickstats website at <a href="https://quickstats.nass.usda.gov/" class="inlinelink">https://quickstats.nass.usda.gov/</a>. The homepage brings up a rather innocuous design:
 
-![usda homepage](https://trimbljk.github.io/theme/images/usda_ws_screenshot.png)
+<img class="articleimg" src=https://trimbljk.github.io/theme/images/usda_ws_screenshot.png>
 
 You can pick from a variety of options that generates a dataset for perusing. It will be displayed after selecting the _Get Data_ button at the bottom left corner of your browser window. You can even download a csv with all the selected values by clicking _spreadsheet_ in the top right corner of your window. Unfortunately, we're only able to work with datasets that contain a max of 50,000 records at a time. 
 

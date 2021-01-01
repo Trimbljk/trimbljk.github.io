@@ -9,7 +9,7 @@ This is the first blog post in what will be a series of posts on retrieving, for
 
 <img class="articleimg" src=https://trimbljk.github.io/theme/images/usda_ws_screenshot.png>
 
-You can pick from a variety of options that generates a dataset for perusing. It will be displayed after selecting the _Get Data_ button at the bottom left corner of your browser window. You can even download a csv with all the selected values by clicking _spreadsheet_ in the top right corner of your window. Unfortunately, we're only able to work with datasets that contain a max of 50,000 records at a time. 
+You can pick from a variety of options that generates a dataset for perusing. It will be displayed after selecting the _Get Data_ button at the bottom left corner of your browser window. You can even download a csv with all the selected values by clicking _spreadsheet_ in the top right corner of your window. Unfortunately, we're only able to work with datasets that contain a maximum of 50,000 records at a time. 
 
 I don't know about you, but any CSV/Excel file over 500 rows is virtually impossible for me to handle in a coherent manner. It's not a fun way to operate and it doesn't scale if you want to look at the millions of records contained in the NASS database. Instead, we're going to use the NASS API to request our desired data and combine it programmatically. The API gives us the ability to build a much larger dataset. It's also our first step in the process of building a dataset to analyze.
 

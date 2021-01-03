@@ -248,8 +248,8 @@ a.article-link:hover{
 	background-color: #73000A;
 	opacity: 0.3;
 	text-align: center;
-	transform: scale(0.95);
-	transition-duration: 0.3s;
+/*	transform: scale(0.95);
+	transition-duration: 0.3s; */
 }
 a.article-link:link div > .article-link-head{
 	color: #73000A;

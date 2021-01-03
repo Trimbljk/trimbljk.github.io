@@ -10,17 +10,17 @@ We're going to use Amazon Web Service (AWS) to build the infrasture we need to m
 
 Let's get started.
 
-To build our infrastructure, we'll be using a cloudformation template. This template can except JSON or YAML format. It's used to specify any infrastructure needs. We'll specify our format as a YAML (I find it easier to read). AWS requires two headers in our format:
+To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). AWS requires two headers in our format:
 
 INSERT FORMAT INFO HERE
 
-Next, we'll specify some resources. We need an S3 bucket to which we upload our data, a crawler to pull information from the s3 bucket and a database to place the data once it's been crawled. Finally we're going to add another bucket for capturing queries from AWS Athena. This is require... (INSERT WHY HERE) Here is my template file from which I'll build the AWS infrastructure:
+Next, we'll specify some resources. We need an S3 bucket to which we will eventually upload our data, a crawler to pull information from the s3 bucket and a database to place the data once it's been crawled. Finally, we're going to add another bucket for capturing queries from AWS Athena. This is require... (INSERT WHY HERE) Here is my template file from which I'll build the AWS infrastructure:
 
 INSERT PICTURE OF TEMPLATE FILE HERE
 
 Each resource has information describing various attributes. For example, we give the bucket a name and specify who has access to data in the bucket. Under the ```Crawler``` resource, we specify the bucket we want to crawl, shema change behaviors when adding or deleting information from the bucket. 
 
-Once we have our template ready, we can use the AWS SAM CLI to deploy our infrastructure.
+Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.
 
 INSERT PICTURE OF THE SAM DEPLOY COMMANDS
 

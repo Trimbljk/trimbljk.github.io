@@ -14,10 +14,8 @@ To build our infrastructure, we'll be using a cloudformation template. This temp
 
 <code class="aws-infrastructure-code">
 <pre>
-
 <span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span>
-
 </pre>
 </code>
 

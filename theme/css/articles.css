@@ -81,3 +81,19 @@ img.articleimg{
 	display: block;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+.aws-infrastructure-code{
+	background-color: black;k
+}
+.infra-variable{
+	color: cyan;
+}
+.colon{
+	color: orange;
+}
+.infra-string-value{
+	color: magenta
+}
+.infra-noq-string-value{
+	color: grey;
+}
+

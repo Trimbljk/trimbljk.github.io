@@ -11,14 +11,12 @@ We're going to use Amazon Web Service (AWS) to build the infrasture we need to m
 Let's get started.
 
 To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will requires the following two headers:
-
+<pre class="setpre">
 <code class="aws-infrastructure-code">
-<pre>
 <span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span>
-</pre>
 </code>
-
+</pre>
 Next, we'll specify some resources. We need an S3 bucket to which we will eventually upload our data, a crawler to pull information from the s3 bucket and a database to place the data once it's been crawled. Finally, we're going to add another bucket for capturing queries from AWS Athena. This is require... (INSERT WHY HERE) Here is my template file from which I'll build the AWS infrastructure:
 
 INSERT PICTURE OF TEMPLATE FILE HERE

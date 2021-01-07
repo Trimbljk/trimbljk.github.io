@@ -45,8 +45,7 @@
 <p>Let's get started.</p>
 <p>To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will requires the following two headers:
 <pre class="setpre">
-<code class="aws-infrastructure-code">
-<span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
+<code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span>
 </code>
 </pre>

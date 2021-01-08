@@ -16,7 +16,7 @@ To build our infrastructure, we'll be using a cloudformation template. This temp
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span></code>
 </pre>
 
-Next, we'll specify some resources. We need an S3 bucket to which we'll eventually upload our data, a crawler to pull information from that S3 bucket and a database to place the data once it's been crawled. All resources are grouped under the <code class="aws-infrastructure-code"><span class="infra-variable">Resources</span></code> header. First we'll draft our bucket:
+Next, we'll specify some resources. We need an S3 bucket to which we'll eventually upload our data, a crawler to pull information from that S3 bucket and a database to place the data once it's been crawled. All resources are grouped under the **Resources** header. First we'll draft our bucket:
 
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">Resources</span><span class="colon">:</span>
@@ -28,7 +28,7 @@ Next, we'll specify some resources. We need an S3 bucket to which we'll eventual
         <span class="infra-variable">BlockPublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
         <span class="infra-variable">BlockPublicPolicy</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
         <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
-        <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value">True</span></code
+        <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value">True</span></code>
 </pre>
 
 We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. I set all my restrictions to **True because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly.

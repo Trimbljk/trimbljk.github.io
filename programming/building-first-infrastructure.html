@@ -46,12 +46,25 @@
 <p>To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will requires the following two headers:
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
-<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span>
-</code>
+<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span></code>
+</pre></p>
+<p>Next, we'll specify some resources. We need an S3 bucket to which we'll eventually upload our data, a crawler to pull information from that S3 bucket and a database to place the data once it's been crawled. All resources are grouped under the <code class="aws-infrastructure-code"><span class="infra-variable">Resources</span></code> header. First we'll draft our bucket:</p>
+<pre class="setpre">
+<code class="aws-infrastructure-code"><span class="infra-variable">Resources</span><span class="colon">:</span>
+  <span class="infra-variable">OutputBucket</span><span class="colon">:</span>
+    <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::S3::Bucket</span>
+    <span class="infra-variable">Properties</span><span class="colon">:</span>
+      <span class="infra-variable">BucketName</span><span class="colon">:</span><span class="infra-string-value">'jkt-usda-api-crop-data'</span>
+      <span class="infra-variable">PublicAccessBlockConfiguration</span><span class="colon">:</span>
+        <span class="infra-variable">BlockPublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
+        <span class="infra-variable">BlockPublicPolicy</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
+        <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
+        <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value">True</span></code
 </pre>
-Next, we'll specify some resources. We need an S3 bucket to which we will eventually upload our data, a crawler to pull information from the s3 bucket and a database to place the data once it's been crawled. Finally, we're going to add another bucket for capturing queries from AWS Athena. This is require... (INSERT WHY HERE) Here is my template file from which I'll build the AWS infrastructure:</p>
-<p>INSERT PICTURE OF TEMPLATE FILE HERE</p>
-<p>Each resource has information describing various attributes. For example, we give the bucket a name and specify who has access to data in the bucket. Under the <code>Crawler</code> resource, we specify the bucket we want to crawl, shema change behaviors when adding or deleting information from the bucket. </p>
+
+<p>We first assign a name to the resource with <strong>OutputBucket</strong> and tell AWS what kind of resource it is using AWS's inherent data convention <strong>AWS::S3::Bucket</strong>. We then describe what the bucket "looks like" under the <strong>Properties</strong> variable. I set all my restrictions to **True because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly.</p>
+<p>DATABASE</p>
+<p>CRAWLER</p>
 <p>Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.</p>
 <p>INSERT PICTURE OF THE SAM DEPLOY COMMANDS</p>
 <p>You should receive a success notification at the CLI. If not you'll have to determine what the are was and fix it accordingly. Once our infrastructure is deployed, we can shift back to thinking about what data we want to collect from the USDA NASS website. </p>

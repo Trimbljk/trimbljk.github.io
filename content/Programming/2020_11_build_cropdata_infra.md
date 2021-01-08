@@ -47,13 +47,13 @@ Next, we'll specify our database resource. This database will hold all the infor
       <span class="infra-variable">SchemaChangePolicy</span><span class="colon">:</span>
         <span class="infra-variable">UpdateBehavior</span><span class="colon">:</span><span class="infra-noq-string-value"> UPDATE_IN_DATABASE</span>
         <span class="infra-variable">DeleteBehavior</span><span class="colon">:</span><span class="infra-noq-string-value"> DELETE_FROM_DATABASE</span>
-      <span class="infra-variable">TablePrefix</span><span class="colon">:</span><span class="infra-noq-string-value"> usda_</span></code>
+      <span class="infra-variable">TablePrefix</span><span class="colon">:</span><span class="infra-noq-string-value"> usda_</span>
       <span class="infra-variable">DatabaseName</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Ref</span><span class="infra-noq-string-value"> CropDatabase</span>
       <span class="infra-variable">Targets</span><span class="colon">:</span>
         <span class="infra-variable">S3Targets</span><span class="colon">:</span>
           <span class="infra-list-dash">-</span><span class="infra-variable"> Path</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Sub</span>
             <span class="infra-list-dash">-</span><span class="infra-string-value"> 's3://${Bucket}/crop-data'</span>
-            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon":</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
+            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon">:</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
       <span class="infra-variable">Schedule</span><span class="colon">:</span>
         <span class="infra-variable">ScheduleExpression</span><span class="colon">:</span><span class="infra-string-value"> 'cron(0 0 ? * MON *)' </span>
       <span class="infra-variable">Role</span><span class="colon">:</span><span class="infra-noq-string-value"> AWSglueServiceRole</span></code>

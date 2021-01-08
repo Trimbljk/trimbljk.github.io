@@ -6,14 +6,13 @@ url: programming/building-first-infrastructure
 
 Before we start gathering crop data to analyze, we should build some serverless infrastructure that can handle large datasets. Fortunately, most major tech companies (Google, Amazon, Microsoft) have wonderful cloud-platforms that allow customers to build any type of infrastructure to support any application.
 
-We're going to use Amazon Web Service (AWS) to build the infrasture we need to manage the data we collect. If you haven't created AWS credentials yet, go ahead and follow the intructions [here](https://portal.aws.amazon.com/billing/signup#/start). Once you're set up, navigate to the [AWS Homepage](https://aws.amazon.com) and hover over the ```Products``` tab, you'll see a variety of solutions from which to choose. For this project, we'll be using [AWS Simple Storage Service](https://aws.amazon.com/s3) or S3, [AWS Glue](https://aws.amazon.com/glue/?nc2=h_ql_prod_an_glu&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc), and [AWS Athena](https://aws.amazon.com/athena/?nc2=h_ql_prod_an_ath&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc). We'll be using S3 to store the files we request from the USDA NASS API. We'll use Glue to crawl our S3 bucket and then use Athena to query that information. To set it all up, we'll use [AWS Serverless Application Management (SAM)](https://docs.aws.amazon.com/serverless-application-model/?id=docs_gateway) and [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc2=h_ql_prod_mg_cfA). 
-
+We're going to use Amazon Web Service (AWS) to build the infrasture we need to manage the data we collect. If you haven't created AWS credentials yet, go ahead and follow the intructions <a href="https://portal.aws.amazon.com/billing/signup#/start" class="inlinelink">here</a>. Once you're set up, navigate to the <a href="https://aws.amazon.com" class="inlinelink">AWS Homepage</a> and hover over the *Products* tab, you'll see a variety of solutions from which to choose. For this project, we'll be using [AWS Simple Storage Service](https://aws.amazon.com/s3) or S3, <a href="https://aws.amazon.com/glue/?nc2=h_ql_prod_an_glu&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc" class="inlinelink">AWS Glue</a>, and <a href="https://aws.amazon.com/athena/?nc2=h_ql_prod_an_ath&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc" class="inlinelink">AWS Athena</a>. We'll be using S3 to store the files we request from the USDA NASS API. We'll use Glue to crawl our S3 bucket and then use Athena to query that information. To set it all up, we'll use <a href="https://docs.aws.amazon.com/serverless-application-model/?id=docs_gateway" class="inlinelink">AWS Serverless Application Management (SAM)</a> and <a href="https://aws.amazon.com/cloudformation/?nc2=h_ql_prod_mg_cfA" class="inlinelink">AWS Cloudformation</a>.
 Let's get started.
 
 To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will requires the following two headers:
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
-<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::Serverless-2016-10-31</span></code>
+<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Serverless-2016-10-31</span></code>
 </pre>
 
 Next, we'll specify some resources. We need an S3 bucket to which we'll eventually upload our data, a crawler to pull information from that S3 bucket and a database to place the data once it's been crawled. All resources are grouped under the **Resources** header. First we'll draft our bucket:
@@ -21,19 +20,27 @@ Next, we'll specify some resources. We need an S3 bucket to which we'll eventual
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">Resources</span><span class="colon">:</span>
   <span class="infra-variable">OutputBucket</span><span class="colon">:</span>
-    <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value">AWS::S3::Bucket</span>
+    <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::S3::Bucket</span>
     <span class="infra-variable">Properties</span><span class="colon">:</span>
-      <span class="infra-variable">BucketName</span><span class="colon">:</span><span class="infra-string-value">'jkt-usda-api-crop-data'</span>
+      <span class="infra-variable">BucketName</span><span class="colon">:</span><span class="infra-string-value"> 'jkt-usda-api-crop-data'</span>
       <span class="infra-variable">PublicAccessBlockConfiguration</span><span class="colon">:</span>
-        <span class="infra-variable">BlockPublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
-        <span class="infra-variable">BlockPublicPolicy</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
-        <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value">True</span>
-        <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value">True</span></code>
+        <span class="infra-variable">BlockPublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span>
+        <span class="infra-variable">BlockPublicPolicy</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span>
+        <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span>
+        <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span></code>
 </pre>
 
-We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. I set all my restrictions to **True because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly.
+We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. I set all my restrictions to **True** because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly by blocking any public access.
 
-DATABASE
+Next, we'll specify our database resource. This database will hold all the information we'll be supplying to S3.
+<pre class="setpre">
+<code class="aws-infrastructure-code">  <span class="infra-variable">Cropdatabase</span><span class="colon">:</span>
+    <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Glue::Database</span>
+    <span class="infra-variable">Properties</span><span class="colon">:</span>
+      <span class="infra-variable">CatalogId</span><span class="colon">:</span><span class="aws-instrinsic-func"> !Ref</span><span class="infra-noq-string-value"> AWS::AccountId </span>
+      <span class="infra-variable">DatabaseInput</span><span class="colon">:</span>
+        <span class="infra-variable">Name</span><span class="colon">:</span><span class="infra-string-value"> "crop_data"</span></code>
+</pre>
 
 CRAWLER
 

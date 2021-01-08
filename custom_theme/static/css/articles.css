@@ -101,4 +101,6 @@ img.articleimg{
 .infra-noq-string-value{
 	color: grey;
 }
-
+.aws-intrinsic-func{
+	color: green;
+}

@@ -14,9 +14,7 @@ To build our infrastructure, we'll be using a cloudformation template. This temp
 <code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Serverless-2016-10-31</span></code>
 </pre>
-
 Next, we'll specify some resources. We need an S3 bucket to which we'll eventually upload our data, a crawler to pull information from that S3 bucket and a database to place the data once it's been crawled. All resources are grouped under the **Resources** header. First we'll draft our bucket:
-
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">Resources</span><span class="colon">:</span>
   <span class="infra-variable">OutputBucket</span><span class="colon">:</span>
@@ -29,8 +27,7 @@ Next, we'll specify some resources. We need an S3 bucket to which we'll eventual
         <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span>
         <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span></code>
 </pre>
-
-We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. I set all my restrictions to **True** because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly by blocking any public access.
+We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. The bucket name must be universal in the S3 namespace and I set all my access restrictions to **True** because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly by blocking any public access.
 
 Next, we'll specify our database resource. This database will hold all the information we'll be supplying to S3.
 <pre class="setpre">
@@ -42,8 +39,25 @@ Next, we'll specify our database resource. This database will hold all the infor
         <span class="infra-variable">Name</span><span class="colon">:</span><span class="infra-string-value"> "crop_data"</span></code>
 </pre>
 
-CRAWLER
-
+<pre class="setpre">
+<code class="aws-infrastructure-code">  <span class="infra-variable">Crawler</span><span class="colon">:</span>
+    <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Glue::Crawler</span>
+    <span class="infra-variable">Properties</span><span class="colon">:</span>
+      <span class="infra-variable">Name</span><span class="colon">:</span><span class="infra-string-value"> 'crop-data-crawler' </span>
+      <span class="infra-variable">SchemaChangePolicy</span><span class="colon">:</span>
+        <span class="infra-variable">UpdateBehavior</span><span class="colon">:</span><span class="infra-noq-string-value"> UPDATE_IN_DATABASE</span></code>
+        <span class="infra-variable">DeleteBehavior</span><span class="colon">:</span><span class="infra-noq-string-value"> DELETE_FROM_DATABASE</span></code>
+      <span class="infra-variable">TablePrefix</span><span class="colon">:</span><span class="infra-noq-string-value"> usda_</span></code>
+      <span class="infra-variable">DatabaseName</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Ref</span><span class="infra-noq-string-value"> CropDatabase</span>
+      <span class="infra-variable">Targets</span><span class="colon">:</span>
+        <span class="infra-variable">S3Targets</span><span class="colon">:</span>
+          <span class="infra-list-dash">-</span><span class="infra-variable"> Path</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Sub</span>
+            <span class="infra-list-dash">-</span><span class="infra-string-value"> 's3://${Bucket}/crop-data'</span>
+            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon":</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
+      <span class="infra-variable">Schedule</span><span class="colon">:</span>
+        <span class="infra-variable">ScheduleExpression</span><span class="colon">:</span><span class="infra-string-value"> 'cron(0 0 ? * MON *)' </span>
+      <span class="infra-variable">Role</span><span class="colon">:</span><span class="infra-noq-string-value"> AWSglueServiceRole</span></code>
+</pre>
 Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.
 
 INSERT PICTURE OF THE SAM DEPLOY COMMANDS

@@ -9,7 +9,7 @@ Before we start gathering crop data to analyze, we should build some serverless 
 We're going to use Amazon Web Service (AWS) to build the infrasture we need to manage the data we collect. If you haven't created AWS credentials yet, go ahead and follow the intructions <a href="https://portal.aws.amazon.com/billing/signup#/start" class="inlinelink">here</a>. Once you're set up, navigate to the <a href="https://aws.amazon.com" class="inlinelink">AWS Homepage</a> and hover over the *Products* tab, you'll see a variety of solutions from which to choose. For this project, we'll be using <a href="https://aws.amazon.com/s3" class="inlinelink">AWS Simple Storage Service</a> or S3, <a href="https://aws.amazon.com/glue/?nc2=h_ql_prod_an_glu&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc" class="inlinelink">AWS Glue</a>, and <a href="https://aws.amazon.com/athena/?nc2=h_ql_prod_an_ath&whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc" class="inlinelink">AWS Athena</a>. We'll be using S3 to store the files we request from the USDA NASS API. We'll use Glue to crawl our S3 bucket and then use Athena to query that information. To set it all up, we'll use <a href="https://docs.aws.amazon.com/serverless-application-model/?id=docs_gateway" class="inlinelink">AWS Serverless Application Management (SAM)</a> and <a href="https://aws.amazon.com/cloudformation/?nc2=h_ql_prod_mg_cfA" class="inlinelink">AWS Cloudformation</a>.
 Let's get started.
 
-To build our infrastructure, we'll be using a cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs as code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will requires the following two headers:
+To build our infrastructure, we'll be using a Cloudformation template. This template can be constructed using JSON or YAML format. The template specifies infrastructure needs using code allowing portability. We'll specify our format in YAML (I find it easier to read). Because we're using AWS Serverless Application Management (SAM), instead of just cloudformation, the template will require the following two headers:
 <pre class="setpre">
 <code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
 <span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Serverless-2016-10-31</span></code>
@@ -27,9 +27,9 @@ Next, we'll specify some resources. We need an S3 bucket to which we'll eventual
         <span class="infra-variable">IgnorePublicAcls</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span>
         <span class="infra-variable">RestrictPublicBuckets</span><span class="colon">:</span><span class="infra-noq-string-value"> True</span></code>
 </pre>
-We first assign a name to the resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention **AWS::S3::Bucket**. We then describe what the bucket "looks like" under the **Properties** variable. The bucket name must be universal in the S3 namespace and I set all my access restrictions to **True** because I want my bucket to be private. Even though private is the default setting on S3 it's good practice to specify it explictly by blocking any public access.
+We first assign a name to the bucket resource with **OutputBucket** and tell AWS what kind of resource it is using AWS's inherent data convention: **AWS::S3::Bucket**. We then describe what features the bucket maintains under the **Properties** variable. The bucket name must be universal in the S3 namespace. I have also set all my access restrictions to **True** because I want my bucket to be private. Even though private is the default setting on S3, it's good practice to specify it explictly by blocking any public access.
 
-Next, we'll specify our database resource. This database will hold all the information we'll be supplying to S3.
+Next, we'll specify our database resource. When the data in our bucket is crawled via AWS Glue, the information will be nicely formatted in the database setforth here. 
 <pre class="setpre">
 <code class="aws-infrastructure-code">  <span class="infra-variable">Cropdatabase</span><span class="colon">:</span>
     <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Glue::Database</span>
@@ -38,7 +38,9 @@ Next, we'll specify our database resource. This database will hold all the infor
       <span class="infra-variable">DatabaseInput</span><span class="colon">:</span>
         <span class="infra-variable">Name</span><span class="colon">:</span><span class="infra-string-value"> "crop_data"</span></code>
 </pre>
+The database resource is specified by the inherent AWS data convention **AWS::Glue::Database**. It's properties are simple. We give it a name and assign our AWS account ID, using an <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html" class="inlinelink">instrinsic fuction</a> to the CatalogId object. Each AWS account receives a catalog to which all data can be written and viewed. This isn't the same as S3, even though you store data in S3. The data catalog represents all data across all databases in a unique usable format.
 
+The last resource than needs to be constructed is the crawler. The crawler will read all the files in a specific path in a bucket and construct, or write, the information contained therein to tables that will appear in our database above.
 <pre class="setpre">
 <code class="aws-infrastructure-code">  <span class="infra-variable">Crawler</span><span class="colon">:</span>
     <span class="infra-variable">Type</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Glue::Crawler</span>
@@ -53,13 +55,22 @@ Next, we'll specify our database resource. This database will hold all the infor
         <span class="infra-variable">S3Targets</span><span class="colon">:</span>
           <span class="infra-list-dash">-</span><span class="infra-variable"> Path</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Sub</span>
             <span class="infra-list-dash">-</span><span class="infra-string-value"> 's3://${Bucket}/crop-data'</span>
-            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon">:</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
+            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-variable">Bucket</span><span class="colon">:</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
       <span class="infra-variable">Schedule</span><span class="colon">:</span>
         <span class="infra-variable">ScheduleExpression</span><span class="colon">:</span><span class="infra-string-value"> 'cron(0 0 ? * MON *)' </span>
       <span class="infra-variable">Role</span><span class="colon">:</span><span class="infra-noq-string-value"> AWSglueServiceRole</span></code>
 </pre>
-Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.
+So, there's a lot going on here in this code. Again we give the resource a name in the template, **Crawler** and assign it it's AWS resource name **AWS::Glue::Crawler**. We then provide it name as will appear on AWS, which is **crop-data-crawler**. Like the others, the names have conventions in which they have to be lowercase. Schema change policy is dictating the proper operations the crawler will conduct we data is deleted or added to it's target path. For example, if you originally had 5 columns located at your target path and updated or deleted a column where the path now contained 6 or 4 respectively, the crawler knows to add in the new column or delete the old data from the data catalog. The table prefix is what's assigned to the data catalog, after crawling, and appears when using AWS Athena. The target database can be referenced using the intrinsic function, **!Ref**. Next, the targets are specified. A path is declared inside the bucket, and since we want to reference our bucket we built earlier, we can, again, use an intrinsic function **!Ref**. A schedule is set, though it's not necessary if you're not constantly updating your schema. Finally, we specify a Role. This is very important. Without a Role, the crawler will not have the security credentials it needs to access the data in the bucket, or any other resrouce. I'm not going to go into detail, because it's not in the scope of this post, but you can view more about Roles, <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" class="inlinelink">here</a>.
 
+Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.
+<pre class="setpre">
+<code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
+<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Serverless-2016-10-31</span></code>
+</pre>
 INSERT PICTURE OF THE SAM DEPLOY COMMANDS
 
 You should receive a success notification at the CLI. If not you'll have to determine what the are was and fix it accordingly. Once our infrastructure is deployed, we can shift back to thinking about what data we want to collect from the USDA NASS website. 
+
+
+
+

@@ -85,7 +85,7 @@ We first assign a name to the resource with <strong>OutputBucket</strong> and te
         <span class="infra-variable">S3Targets</span><span class="colon">:</span>
           <span class="infra-list-dash">-</span><span class="infra-variable"> Path</span><span class="colon">:</span><span class="aws-intrinsic-func"> !Sub</span>
             <span class="infra-list-dash">-</span><span class="infra-string-value"> 's3://${Bucket}/crop-data'</span>
-			<span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon">:</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
+            <span class="infra-list-dash">-</span><span class="colon"> { </span><span class="infra-string-value">Bucket</span><span class="colon">:</span><span class="infra-noq-string-value"> !Ref OutputBucket</span><span class="colon"> }</span>
       <span class="infra-variable">Schedule</span><span class="colon">:</span>
         <span class="infra-variable">ScheduleExpression</span><span class="colon">:</span><span class="infra-string-value"> 'cron(0 0 ? * MON *)' </span>
       <span class="infra-variable">Role</span><span class="colon">:</span><span class="infra-noq-string-value"> AWSglueServiceRole</span></code>

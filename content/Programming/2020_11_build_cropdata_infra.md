@@ -64,14 +64,14 @@ So, there's a lot going on here in this code. Again we give the resource a name 
 
 Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure. AWS SAM is built on top of Cloudformation and much could be written about both SAM and Cloudformation. If you want extensive detail, please refer to the thinks in second paragraph. In an effort to keep this section brief, essentialy we have to *build a package* and then *deploy* it. This package will contain the name of a "stack" that points to the resources we created above. An example of the first command is provided in the next code snippet.
 <pre class="setpre">
-<code class="aws-infrastructure-code"><span class="commandline-code">sam build --skip-pull-image --use-container --region "us-east-1" \\</span>
-		<span class="commandline-code">--profile lopcer</span></code>
+<code class="aws-infrastructure-code"><span class="commandline-code">sam build --skip-pull-image --use-container  \\</span>
+		<span class="commandline-code">--region "us-east-1" --profile lopcer</span></code>
 </pre>
 This first command builds our package in a local build folder. This folder is used to deploy the package in the next command. We specify the region we want the infrastructure deployed and use a container to build it. Finally, since I have multiple accounts, I specify which account I want it to build in. The next code snippet is what we'll use to deploy our "stack".
 <pre class="setpre">
-<code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml --stack-name "jkt-crop-data-usda" \\</span>
-		<span class>--capabilities CAPABILITY_IAM --no-fail-on-empty-changeset \\</span></code></pre>
-		<span class>--region "us-east-1" --profile locper</span></code>
+<code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml \\</span>
+		<span class="commandline-code">--stack-name "jkt-crop-data-usda"--capabilities CAPABILITY_IAM \\</span></code></pre>
+		<span class="commandline-code">--no-fail-on-empty-changeset --region "us-east-1" --profile locper</span></code>
 </pre>
 In our deploy command, we specify our template file where we assigned resources, the package.yaml file that was built from the sam deploy command and the name of our "stack". Next we pass a security permission parameter --capabilities CAPABILITY_IAM and an option to not throw an error if we deploy again but don't make any changes. If you want to learn about each of these, please refer to the information in the second paragraph about AWS SAM. You should receive a success notification at the CLI. If not you'll have to determine what the are was and fix it accordingly. Once our infrastructure is deployed, we can shift back to thinking about what data we want to collect from the USDA NASS website. In the next post, I'll be using Jupyter to request data from NASS, format the info into files, and upload them to the bucket we built. 
 

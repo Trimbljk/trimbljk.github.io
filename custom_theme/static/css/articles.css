@@ -88,8 +88,6 @@ img.articleimg{
 	overflow-x: auto;
 	text-indent: 0px;
 	padding: 20px 15px 20px 15px;
-	font-family: SF Mono;
-	font-style: Regular;
 }
 .infra-variable{
 	color: cyan;
@@ -108,4 +106,7 @@ img.articleimg{
 }
 .infra-list-dash{
 	color: yellow;
+}
+.commandline-code{
+	color: white;
 }

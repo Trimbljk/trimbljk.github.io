@@ -62,14 +62,18 @@ The last resource than needs to be constructed is the crawler. The crawler will 
 </pre>
 So, there's a lot going on here in this code. Again we give the resource a name in the template, **Crawler** and assign it it's AWS resource name **AWS::Glue::Crawler**. We then provide it name as will appear on AWS, which is **crop-data-crawler**. Like the others, the names have conventions in which they have to be lowercase. Schema change policy is dictating the proper operations the crawler will conduct we data is deleted or added to it's target path. For example, if you originally had 5 columns located at your target path and updated or deleted a column where the path now contained 6 or 4 respectively, the crawler knows to add in the new column or delete the old data from the data catalog. The table prefix is what's assigned to the data catalog, after crawling, and appears when using AWS Athena. The target database can be referenced using the intrinsic function, **\! Ref**. Next, the targets are specified. A path is declared inside the bucket, and since we want to reference our bucket we built earlier, we can, again, use an intrinsic function **\! Ref**. A schedule is set, though it's not necessary if you're not constantly updating your schema. Finally, we specify a Role. This is very important. Without a Role, the crawler will not have the security credentials it needs to access the data in the bucket, or any other resrouce. I'm not going to go into detail, because it's not in the scope of this post, but you can view more about Roles, <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" class="inlinelink">here</a>.
 
-Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure.
+Once we have our template prepared, we can use the AWS SAM CLI to deploy our infrastructure. AWS SAM is built on top of Cloudformation and much could be written about both SAM and Cloudformation. If you want extensive detail, please refer to the thinks in second paragraph. In an effort to keep this section brief, essentialy we have to *build a package* and then *deploy* it. This package will contain the name of a "stack" that points to the resources we created above. An example of the first command is provided in the next code snippet.
 <pre class="setpre">
-<code class="aws-infrastructure-code"><span class="infra-variable">AWSTemplateFormatVersion</span><span class="colon">:</span><span class="infra-string-value"> '2010-09-09'</span>
-<span class="infra-variable">Transform</span><span class="colon">:</span><span class="infra-noq-string-value"> AWS::Serverless-2016-10-31</span></code>
+<code class="aws-infrastructure-code"><span class="commandline-code">sam build --skip-pull-image --use-container --region "us-east-1" \\</span>
+		<span class="commandline-code">--profile lopcer</span></code>
 </pre>
-INSERT PICTURE OF THE SAM DEPLOY COMMANDS
-
-You should receive a success notification at the CLI. If not you'll have to determine what the are was and fix it accordingly. Once our infrastructure is deployed, we can shift back to thinking about what data we want to collect from the USDA NASS website. 
+This first command builds our package in a local build folder. This folder is used to deploy the package in the next command. We specify the region we want the infrastructure deployed and use a container to build it. Finally, since I have multiple accounts, I specify which account I want it to build in. The next code snippet is what we'll use to deploy our "stack".
+<pre class="setpre">
+<code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml --stack-name "jkt-crop-data-usda" \\</span>
+		<span class>--capabilities CAPABILITY_IAM --no-fail-on-empty-changeset \\</span></code></pre>
+		<span class>--region "us-east-1" --profile locper</span></code>
+</pre>
+In our deploy command, we specify our template file where we assigned resources, the package.yaml file that was built from the sam deploy command and the name of our "stack". Next we pass a security permission parameter --capabilities CAPABILITY_IAM and an option to not throw an error if we deploy again but don't make any changes. If you want to learn about each of these, please refer to the information in the second paragraph about AWS SAM. You should receive a success notification at the CLI. If not you'll have to determine what the are was and fix it accordingly. Once our infrastructure is deployed, we can shift back to thinking about what data we want to collect from the USDA NASS website. In the next post, I'll be using Jupyter to request data from NASS, format the info into files, and upload them to the bucket we built. 
 
 
 

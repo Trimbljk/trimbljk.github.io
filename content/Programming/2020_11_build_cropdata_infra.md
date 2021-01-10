@@ -66,8 +66,7 @@ Once we have our template prepared, we can use the AWS SAM CLI to deploy our inf
 
 This first command builds our package in a local build folder. This folder is used to deploy the package in the next command. We specify the region we want the infrastructure deployed and use a container to build it. Finally, since I have multiple accounts, I designate which account I want it to build in. The next code snippet is what we'll use to deploy our stack.
 
-<pre class="setpre">
-<code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml \\</span>
+<pre class="setpre"><code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml \</span>
 	<span class="commandline-code">--stack-name "jkt-crop-data-usda" \</span>
 	<span class="commandline-code">--capabilities CAPABILITY_IAM \</span>
 	<span class="commandline-code">--no-fail-on-empty-changeset \</span> 

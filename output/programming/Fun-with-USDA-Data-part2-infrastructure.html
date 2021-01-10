@@ -90,8 +90,7 @@
 <pre class="setpre"><code class="aws-infrastructure-code"><span class="commandline-code">sam build --skip-pull-image --use-container  \</span>
         <span class="commandline-code">--region "us-east-1" --profile lopcer</span></code></pre></p>
 <p>This first command builds our package in a local build folder. This folder is used to deploy the package in the next command. We specify the region we want the infrastructure deployed and use a container to build it. Finally, since I have multiple accounts, I designate which account I want it to build in. The next code snippet is what we'll use to deploy our stack.</p>
-<pre class="setpre">
-<code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml \\</span>
+<pre class="setpre"><code class="aws-infrastructure-code"><span class="commandline-code">sam deploy --template-file package.yml \</span>
     <span class="commandline-code">--stack-name "jkt-crop-data-usda" \</span>
     <span class="commandline-code">--capabilities CAPABILITY_IAM \</span>
     <span class="commandline-code">--no-fail-on-empty-changeset \</span> 

@@ -7,6 +7,7 @@ SITENAME = 'Just Another Data Science Blog'
 SITE_URL = 'https://trimbljk.github.io'
 DIRECT_TEMPLATES = ['index', 'archives']
 PATH = 'content'
+ARTICLE_EXCLUDES = ['drafts']
 THEME = 'custom_theme'
 TIMEZONE = 'America/New_York'
 CSS_FILE = 'custom.css'
@@ -37,13 +38,10 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 SOCIAL = (('Github', 'https://github.com/Trimbljk/'),
          ('LinkedIn', 'https://www.linkedin.com/in/jake-trimble/'),
-         ('Twitter', 'https://twitter.com/JakeTrimble11'),)
-
+         )
 LINKS = (
         ('Data Science Central', 'https://www.datasciencecentral.com/'),
         ('Tidy Data by Hadley Wickham', 'https://vita.had.co.nz/papers/tidy-data.pdf'),
-        ('Testing', 'https://www.espn.com'),
-        ('Check This Out', 'https://www.espn.com')
         )
 DEFAULT_PAGINATION = False
 

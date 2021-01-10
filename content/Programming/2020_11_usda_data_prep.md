@@ -1,5 +1,5 @@
-Title: Parsing the USDA's National Agriculture Statistics Service Data
-Date: 2020-11-23
+Title: Fun with UDSA NASS Data - Part 1: Setting Up API Access Credentials 
+Date: 2021-01-07-
 Save_as: programming/usda-nass.html
 Slug: Apply for a USDA API Key
 url: programming/usda-nass

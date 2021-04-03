@@ -1,4 +1,4 @@
-Title: Fun with UDSA NASS Data - Part 2: Building Cloud Infrastructure
+Title: Fun with USDA NASS Data - Part 2: Building Cloud Infrastructure
 Date: 2021-01-10
 Save_as: programming/Fun-with-USDA-Data-part2-infrastructure.html
 Slug: Fun-with-USDA-Data-part2-infrastructure

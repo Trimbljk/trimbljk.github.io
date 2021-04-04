@@ -14,7 +14,7 @@ CSS_FILE = 'custom.css'
 DEFAULT_LANG = 'en'
 DELETE_OUTPUT_DIRECTORY = True
 MENUITEMS = (('Home', 'https://trimbljk.github.io'),
-        ('About', 'https://trimbljk.github.io'),
+        ('About', 'https://trimbljk.github.io/about.html'),
         ('Data Science', 'https://trimbljk.github.io/data-science.html'),
         ('Programming', 'https://trimbljk.github.io/programming.html'),
         ('Musings', 'https://trimbljk.github.io/musings.html'),

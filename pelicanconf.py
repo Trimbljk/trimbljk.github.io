@@ -45,5 +45,13 @@ LINKS = (
         )
 DEFAULT_PAGINATION = False
 
+from pelican.plugins import pelican_jupyter_reader
+PLUGINS = [pelican_jupyter_reader]
+from traitlets.config import Config
+NBCONVERT_CONFIG = Config()
+
+NBCONVERT_CONFIG.HTMLExporter.exclude_input_prompt = True
+NBCONVERT_CONFIG.HTMLExporter.exclude_output_prompt = True
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

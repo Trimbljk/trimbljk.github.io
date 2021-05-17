@@ -110,3 +110,8 @@ img.articleimg{
 .commandline-code{
 	color: white;
 }
+/* custom css for jupyter handling jupyter notebook files */
+div#notebook{
+	font-size: 18px!important;
+	text-indent: 0;
+}

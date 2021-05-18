@@ -42,6 +42,8 @@ SOCIAL = (('Github', 'https://github.com/Trimbljk/'),
 LINKS = (
         ('Data Science Central', 'https://www.datasciencecentral.com/'),
         ('Tidy Data by Hadley Wickham', 'https://vita.had.co.nz/papers/tidy-data.pdf'),
+        ('Best Place to Learn CSS', 'https://css-tricks.com/'),
+        ('Master Python with Corey Schafer', 'https://www.youtube.com/user/schafer5')
         )
 DEFAULT_PAGINATION = False
 

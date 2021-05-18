@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/articles.css">
 	<link rel="shortcut icon" type="image/svg" href="https://trimbljk.github.io/theme/images/libertyflame.svg">
-	<title>Fun-with-USDA-Data-part4-API</title>
+	<title>Fun-with-USDA-Data-part3-API</title>
 
 </head>
 <body>
@@ -31,7 +31,7 @@
         </header>
 <main class="main-article-content">
 	<div class="article-title">
-		Fun with USDA NASS Data - Part 4: Querying the NSAA API
+		Fun with USDA NASS Data - Part 3: Querying the NSAA API
 		<div class="article-date">
 			<time class="published" datetime="2021-04-24T00:00:00-04:00">
 				2021-April-24
@@ -13124,7 +13124,7 @@ div#notebook {
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is part four in a series of blogs posts on working with data from the USDA NASS database. It follows the third article <a href="" class="inlinelink"> insert info here</a>. In this post, we'll be using <a href="" class="inlinelink">JupyterLab</a> to request data from the NASS database using their API. Since we've already established our <a href="" class="inlinelink">credentials</a>, set up our infrastructure, and deployed our working container, we're ready to retrieve data and send it to AWS for storage.</p>
+<p>This is part three in a series of blogs posts working with data from the USDA NASS database. It follows the second article, <a href="https://trimbljk.github.io/programming/Fun-with-USDA-Data-part2-infrastructure" class="inlinelink"> Part 2: Building Cloud Infrastructure</a>. In this post, we'll be using <a href="http://jupyterlab.io/" class="inlinelink">JupyterLab</a> to request data from the NASS database using their API. Since we've already established our <a href="https://trimbljk.github.io/programming/usda-nass" class="inlinelink">credentials</a>, set up our infrastructure, and deployed our working container, we're ready to retrieve data and send it to AWS for storage.</p>
 
 </div>
 </div>
@@ -13147,7 +13147,6 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm_notebook</span> <span class="k">as</span> <span class="n">tn</span>
 <span class="kn">import</span> <span class="nn">boto3.session</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USDAKEY&quot;</span><span class="p">)</span>
@@ -13390,10 +13389,10 @@ div#notebook {
 
  
  
-<div id="4d6e87b1-a712-4647-b324-e378dffebdc1"></div>
+<div id="f8d1db1f-c304-4b9e-a9d5-4afe9c3a6bcc"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#4d6e87b1-a712-4647-b324-e378dffebdc1');
+var element = $('#f8d1db1f-c304-4b9e-a9d5-4afe9c3a6bcc');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "beb027952c064ce3b5fa7bfe2f6afd88", "version_major": 2, "version_minor": 0}
@@ -13497,10 +13496,10 @@ var element = $('#4d6e87b1-a712-4647-b324-e378dffebdc1');
 
  
  
-<div id="3475ae99-b4c0-459d-9726-4b995a5b2b5c"></div>
+<div id="75e68264-6ebe-44fd-b4f3-d4808deb4733"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#3475ae99-b4c0-459d-9726-4b995a5b2b5c');
+var element = $('#75e68264-6ebe-44fd-b4f3-d4808deb4733');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "20f6790d16814b86b1f70767294d21cc", "version_major": 2, "version_minor": 0}
@@ -13534,7 +13533,7 @@ var element = $('#3475ae99-b4c0-459d-9726-4b995a5b2b5c');
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>After receiving a 200 response, we can check our S3 bucket to ensure all data and partitions are present.</p>
-<p>Well, after all that, we are FINALLY ready to do some data analysis. It's not easy wrangling data, but it's rewarding when it's finished because you learn a lot in the prcoess. You also learn useful coding skills that can be applied when doing an analysis. Think about it, to get to this point we had to learn about AWS resources including: Cloudformation, SAM, S3 and AWS Glue. We're running the current notebook in a docker container and had to use the command line to make it happen. In this notebook, we're using python to wrangle data from a third party API in the USDA. That's a lot of work just to get the data into a format you can query. Exciting stuff. The final blog post will entail exploring the data we've wrangled here.</p>
+<p>Well, after all that, we are FINALLY ready to do some data analysis. It's not easy wrangling data, but it's rewarding when it's finished because you learn a lot in the prcoess. You also learn useful coding skills that can be applied when doing an analysis. Think about it, to get to this point we had to learn about AWS resources including: Cloudformation, SAM, S3 and AWS Glue. In this notebook, we're using python to wrangle data from a third party API in the USDA. That's a lot of work just to get the data into a format you can query. Exciting stuff. The final blog post will entail exploring the data we've wrangled here.</p>
 
 </div>
 </div>

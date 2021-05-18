@@ -111,12 +111,16 @@ img.articleimg{
 }
 /* custom css for jupyter handling jupyter notebook files */
 div#notebook{
-	font-size: 22px !important;
+	font-size: 18px !important;
+	line-height: 23px !important;
 }
 .highlight{
 	text-indent: 0px;
 	font-size: 16px !important;
 }
 .text_cell_render{
-	text-indent: 3px;
+	text-indent: 3em;
+}
+div#notebook-container{
+	padding: 0px 0px 0px 0px !important;
 }

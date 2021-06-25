@@ -5,7 +5,8 @@ body {
 	margin-left: 22%;
 	margin-right: 22%;
 	padding-top: 0px;
-	font-family: arial, helvetica, sans-serif;
+	font-family: arial, helvetica, sans-serif!important;
+	padding: 0px !important;
 }
 /* settings for media queries */
 @media only screen and (max-width: 2400px) {
@@ -45,9 +46,9 @@ body {
 }
 @media only screen and (max-width: 1400px) {
 	body {
-		margin-top: 0px;
-		margin-left: 0px;
-		margin-right: 0px;
+		margin-top: 0px !important;
+		margin-left: 0px!important;
+		margin-right: 0px!important;
 	}
 }
 .header {
@@ -70,7 +71,13 @@ body {
 	margin-top: 0px;
 	margin-bottom:0px;
 	text-align: center;
+	font-weight: bold;
 }
+.h1{
+	font-weight: bold !important;
+	line-height: 0 !important;
+}
+
 @media only screen and (max-width: 1000px) {
 	#top-title {
 		justify-content: center;

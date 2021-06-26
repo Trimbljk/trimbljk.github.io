@@ -98,3 +98,20 @@ div.input_area {
   background: #f7f7f7;
   line-height: 1.21429em;
 }
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}

@@ -1,5 +1,10 @@
 .highlight .hll { background-color: #ffffcc }
-.highlight { background: #f8f8f8; text-indent: 0px; overflow: auto;}
+.highlight { 
+	background: #f8f8f8; 
+	text-indent: 0px; 
+	overflow: auto;
+	padding-left: 10px
+}
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
@@ -180,4 +185,8 @@ div.output_wrapper {
   flex-direction: column;
   align-items: stretch;
   z-index: 1;
+}
+.output_text.output_subarea.output_execute_result {
+    text-indent: 10px;
+	overflow: auto;
 }

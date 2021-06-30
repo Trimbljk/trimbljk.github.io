@@ -3,7 +3,8 @@
 	background: #f8f8f8; 
 	text-indent: 0px; 
 	overflow: auto;
-	padding-left: 10px
+	padding-left: 10px;
+	font-size: 18px;
 }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
@@ -189,4 +190,5 @@ div.output_wrapper {
 .output_text.output_subarea.output_execute_result {
     text-indent: 10px;
 	overflow: auto;
+	font-size: 18px;
 }

@@ -5,6 +5,7 @@
 	overflow: auto;
 	padding-left: 10px;
 	font-size: 18px;
+	line-height: normal;
 }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
@@ -97,12 +98,15 @@ div.inner_cell {
   /* Modern browsers */
   flex: 1;
 }
+div.text_cell_render p{
+	margin-block-start: 5px;
+	margin-block-end: 5px;
+}
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
   border: 1px solid #cfcfcf;
   border-radius: 2px;
   background: #f7f7f7;
-  line-height: 1.21429em;
 }
 div.input {
   page-break-inside: avoid;

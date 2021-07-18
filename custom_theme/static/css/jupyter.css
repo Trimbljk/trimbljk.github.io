@@ -148,7 +148,7 @@ div.cell {
   border-style: solid;
   border-color: transparent;
   width: 100%;
-  padding: 5px;
+  padding-bottom: 10px;
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;

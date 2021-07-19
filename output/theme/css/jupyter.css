@@ -148,7 +148,7 @@ div.cell {
   border-style: solid;
   border-color: transparent;
   width: 100%;
-  padding: 5px;
+  padding-bottom: 10px;
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
@@ -195,4 +195,8 @@ div.output_wrapper {
     text-indent: 10px;
 	overflow: auto;
 	font-size: 18px;
+}
+.matplotlib {
+	display: block;
+	width: 100%;
 }

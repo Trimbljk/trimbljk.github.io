@@ -196,3 +196,7 @@ div.output_wrapper {
 	overflow: auto;
 	font-size: 18px;
 }
+.matplotlib {
+	display: block;
+	width: 100%;
+}

@@ -199,6 +199,7 @@ div.output_wrapper {
 .matplotlib {
 	display: block;
 	width: 100%;
+	margin-top: 20px;
 }
 .rendered_html table {
   margin-left: auto;

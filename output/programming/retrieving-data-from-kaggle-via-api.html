@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/articles.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/jupyter.css">
+	<link rel="shortcut icon" type="image/svg" href="https://trimbljk.github.io/theme/images/libertyflame.svg">
+	<title>retrieving-data-from-kaggle-via-api</title>
+
+</head>
+<body>
+	<header class="header">			
+		<div class="title-fav">
+			<h1 id=top-title>Just Another Data Science Blog...</h1>
+			<ul id="social-favi">
+				<li class="favi-list">
+					<a href="https://www.github.com/Trimbljk"><img class="faviconimg" src="https://trimbljk.github.io/theme/images/github-logo.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			<a href="https://www.linkedin.com/in/jake-trimble/"><img class="faviconimg" src="https://trimbljk.github.io/theme/images/linkedin.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			</ul>
+		</div> 
+		<nav>
+			<a href="https://trimbljk.github.io" class="nav-links">Home</a>
+			<a href="https://trimbljk.github.io/about.html" class="nav-links">About</a>
+			<a href="https://trimbljk.github.io/data-science.html" class="nav-links">Data Science</a>
+			<a href="https://trimbljk.github.io/programming.html" class="nav-links">Programming</a>
+			<a href="https://trimbljk.github.io/musings.html" class="nav-links">Musings</a>
+			<a href="https://trimbljk.github.io/archives.html" class="nav-links">Archives</a>
+            	</nav>
+        </header>
+<main class="main-article-content">
+	<div class="article-title">
+		Retrieving Data from Kaggle via the Kaggle API
+		<div class="article-date">
+			<time class="published" datetime="2021-08-02T00:00:00-04:00">
+				2021-August-02
+			</time>
+		</div>
+	</div>
+	<div class="article-content">
+	<p><a href="https://www.kaggle.com/" class="inlinelink">Kaggle</a> is a great website for finding datasets to help expand skills and expertise in data science. In this post, we'll discuss a quick set-up of Kaggle at the command line and then pull a dataset. It will be followed up with a post where we'll use <a href="https://www.r-project.org/" class="inlinelink">R</a> do build a plot with <a href="https://ggplot2.tidyverse.org/" class="inlinelink">Ggplot2</a>. Before getting started, be sure to set up an account on Kaggle. You'll need an account to request an API key. The first thing we'll do is install the Kaggle package using your Python package manager, PIP. To install Kaggle, use the<em>pip install kaggle</em> command. This will download the package and create a hidden <em>.kaggle/</em> folder in your home directory. </p>
+<p>Next, we'll create an API token by navigating to our account settings page and create an API token. Selecting the <em>Create New API Token</em> button will download a <em>kaggle.json</em> file that you can store in the hidden <em>.kaggle/</em> folder discuss in the previous paragraph.</p>
+<p><img class="articleimg" src=https://trimbljk.github.io/theme/images/kaggle-api.png></p>
+<p>Now we're ready to download some data. For visualizations in the next blog I'd like to use the dataset provided by raghavramasamy. He pulled information from the Food and Agricultural Organization (FAO) about world-wide crop statistics. This is a nice dataset because it's already in <a href="https://vita.had.co.nz/papers/tidy-data.pdf" class="inlinelink">tidy</a> format.</p>
+<p>To download this dataset run: <em>kaggle download datasets -d raghavramasamy/crop-statistics-fao-all-countries</em>. It will download a file to your local directory. Once this is complete, we're ready to using the data.</p>
+	</div>
+</main>
+	<footer class="footer">
+		<div>Copyright © 2021 Jake Trimble</div>
+		<div class="pelican-info">
+		<address class="address">
+			Proudly powered by Pelican
+		</address><!-- /#about -->
+		<div>Theme by <a href="https://github.com/Trimbljk">@trimbljk</a></div>
+		</div>
+	</footer>
+</body>
+</html>

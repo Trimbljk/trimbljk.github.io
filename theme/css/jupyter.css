@@ -195,6 +195,7 @@ div.output_wrapper {
     text-indent: 10px;
 	overflow: auto;
 	font-size: 18px;
+	overflow-x: auto;
 }
 .matplotlib {
 	display: block;

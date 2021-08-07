@@ -209,6 +209,7 @@ div.output_wrapper {
   color: black;
   font-size: 12px;
   table-layout: fixed;
+  overflow-x: auto;
 }
 .rendered_html thead {
   border-bottom: 1px solid black;

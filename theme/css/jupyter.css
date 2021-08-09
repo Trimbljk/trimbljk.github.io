@@ -171,6 +171,7 @@ output {
   font-size: 13px;
   line-height: 1.42857143;
   color: #555555;
+  overflow-x: auto;
 }
 div.output_wrapper {
   /* this position must be relative to enable descendents to be absolute within it */

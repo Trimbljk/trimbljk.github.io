@@ -191,6 +191,7 @@ div.output_wrapper {
   flex-direction: column;
   align-items: stretch;
   z-index: 1;
+  overflow-x: auto;
 }
 .output_text.output_subarea.output_execute_result {
     text-indent: 10px;

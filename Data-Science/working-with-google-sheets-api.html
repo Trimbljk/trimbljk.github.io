@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/articles.css">
+	<link rel="stylesheet" type="text/css" href="https://trimbljk.github.io/theme/css/jupyter.css">
+	<link rel="shortcut icon" type="image/svg" href="https://trimbljk.github.io/theme/images/libertyflame.svg">
+	<title>working-with-google-sheets-api</title>
+
+</head>
+<body>
+	<header class="header">			
+		<div class="title-fav">
+			<h1 id=top-title>Just Another Data Science Blog...</h1>
+			<ul id="social-favi">
+				<li class="favi-list">
+					<a href="https://www.github.com/Trimbljk"><img class="faviconimg" src="https://trimbljk.github.io/theme/images/github-logo.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			<a href="https://www.linkedin.com/in/jake-trimble/"><img class="faviconimg" src="https://trimbljk.github.io/theme/images/linkedin.svg" height="45" width="45"></a></li>
+				<li class="favi-list">
+			</ul>
+		</div> 
+		<nav>
+			<a href="https://trimbljk.github.io" class="nav-links">Home</a>
+			<a href="https://trimbljk.github.io/about.html" class="nav-links">About</a>
+			<a href="https://trimbljk.github.io/data-science.html" class="nav-links">Data Science</a>
+			<a href="https://trimbljk.github.io/programming.html" class="nav-links">Programming</a>
+			<a href="https://trimbljk.github.io/musings.html" class="nav-links">Musings</a>
+			<a href="https://trimbljk.github.io/archives.html" class="nav-links">Archives</a>
+            	</nav>
+        </header>
+<main class="main-article-content">
+	<div class="article-title">
+		Working with the Google Sheets API in Python
+		<div class="article-date">
+			<time class="published" datetime="2022-01-25T00:00:00-05:00">
+				2022-January-25
+			</time>
+		</div>
+	</div>
+	<div class="article-content">
+	
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using Google Sheets to collaborate is a great way to get work accomplished if you and your collaborator/s:</p>
+<ol>
+<li>have different schedules and upload data at different times.</li>
+<li>collect different data that needs to be aggregated in the same place,</li>
+<li>want to work off the same kind of data.</li>
+<li>don't use a formal database for data collection.</li>
+</ol>
+<p>As an active data scientist, while I would prefer to have data captured in a queryable database, sometimes that might not be an option; especially if that data is a one-off experiment. Luckily, Google Sheets has an api to which I can connect and programmatically manipulate data. This blog post will walk through some of these actions using Python.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Before jumping into the code, I am presuming you have a familiarity with Google's service account system. To quote from Google's cloud documentation, <em>"A service account is a special type of Google account intended to represent a non-human user that needs to authenticate and be authorized to access data in Google APIs."</em> You can read more about it <a href="https://cloud.google.com/iam/docs/understanding-service-accounts">here</a>. If you don't have a service account you won't be able to access data from a spreadsheet.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once your service account is set up we can get started by installing some packages. First we'll install the <em>google-api-python-client</em> package. This api will let us use Google's APIs. Next, we'll install the dataframe manipulator package, <em>pandas</em>, followed up with <em>boto3</em>, AWS's API Python client library. We'll use this library to get our secret account credentials from AWS. The <em>json</em> and <em>os</em> packages are needed for data formatting and environment variable calling, respectively. Finally, we'll install the <em>faker</em> package. This last one will help us generate some nice dummy data, on which to experiment, while testing out the Sheets API.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">google.oauth2</span> <span class="k">import</span> <span class="n">service_account</span>
+<span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="k">import</span> <span class="n">build</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">faker</span> <span class="k">import</span> <span class="n">Faker</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we need to create and new spreadsheet to which we'll connect using the block of code below. Type <code>sheets.new</code> into your browser and a new Google spreadsheet workbook will be created. Be sure to give it a title. You'll next want to grab the workbook ID from the URL bar.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img class="articleimg" src="https://trimbljk.github.io/theme/images/sheetsurl.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I placed mine into an environment variable and passed it to my notebook environment.</p>
+<p>Alright, let's connect to the Sheets API. We'll need to retrieve our service account credentials. I saved mine in AWS secret's manager service. Using <em>boto3</em>, I can pass these credentials to the sheets service, authorizing connection.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;secretsmanager&quot;</span><span class="p">)</span>
+<span class="n">secret_json</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="s2">&quot;trimble-service-account-google-apis&quot;</span><span class="p">)[</span>
+    <span class="s2">&quot;SecretString&quot;</span>
+<span class="p">]</span>
+<span class="n">secret_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">secret_json</span><span class="p">)</span>
+<span class="n">scopes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://www.googleapis.com/auth/spreadsheets&quot;</span><span class="p">]</span>
+
+<span class="n">creds</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_info</span><span class="p">(</span>
+    <span class="n">secret_data</span><span class="p">,</span> <span class="n">scopes</span><span class="o">=</span><span class="n">scopes</span>
+<span class="p">)</span>
+<span class="n">service</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s2">&quot;sheets&quot;</span><span class="p">,</span> <span class="s2">&quot;v4&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">creds</span><span class="p">)</span>
+<span class="n">sheets</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
+<span class="n">sheet_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SHEET_ID&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first thing we're going to do is add data to the spreadsheet. We'll use the <em>faker</em> module to generate some random data. We can call the <em>profile()</em> method which creates a "person" with various information include a Social Security Number, address, name, etc. It's already formatted correctly for incorporation into a dataframe with <em>pandas</em>. Let's generate the data and visualize it calling the <em>head()</em> method on the dataframe.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
+<span class="n">profileData</span> <span class="o">=</span> <span class="p">[</span><span class="n">fake</span><span class="o">.</span><span class="n">profile</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">profileData</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>job</th>
+      <th>company</th>
+      <th>ssn</th>
+      <th>residence</th>
+      <th>current_location</th>
+      <th>blood_group</th>
+      <th>website</th>
+      <th>username</th>
+      <th>name</th>
+      <th>sex</th>
+      <th>address</th>
+      <th>mail</th>
+      <th>birthdate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Lecturer, higher education</td>
+      <td>Hart PLC</td>
+      <td>164-04-3123</td>
+      <td>13655 Ashley Unions Suite 616\nLoveborough, ID...</td>
+      <td>(53.0466615, -82.546387)</td>
+      <td>A+</td>
+      <td>[http://www.howell-sharp.net/, https://www.rob...</td>
+      <td>youngzachary</td>
+      <td>Cassandra Alvarado</td>
+      <td>F</td>
+      <td>63480 Liu Run\nNorth Anne, OR 10500</td>
+      <td>crystal50@yahoo.com</td>
+      <td>1972-12-03</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Records manager</td>
+      <td>Walker, Patton and George</td>
+      <td>180-92-5579</td>
+      <td>21263 Pamela Extensions\nVillamouth, KS 96993</td>
+      <td>(-78.0920215, -165.065549)</td>
+      <td>O-</td>
+      <td>[https://campbell-reed.com/]</td>
+      <td>nelsonsamantha</td>
+      <td>Michael Blake</td>
+      <td>M</td>
+      <td>67091 Adam Wall Suite 530\nNorth Lisa, AK 93355</td>
+      <td>asmith@hotmail.com</td>
+      <td>1937-08-24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Visual merchandiser</td>
+      <td>Kelley-Simmons</td>
+      <td>475-02-6595</td>
+      <td>5506 Riggs Junctions\nTaylorville, PA 48609</td>
+      <td>(10.722590, -41.148270)</td>
+      <td>A+</td>
+      <td>[https://www.brown.net/, http://www.davis.com/...</td>
+      <td>jefferysmith</td>
+      <td>Richard Jones</td>
+      <td>M</td>
+      <td>72826 Norman Grove\nAlantown, MD 17603</td>
+      <td>imelendez@yahoo.com</td>
+      <td>1993-08-01</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mining engineer</td>
+      <td>Warren, Walsh and Myers</td>
+      <td>894-20-0037</td>
+      <td>31788 Crane Extension\nGarciafort, MS 74611</td>
+      <td>(25.205013, 133.580372)</td>
+      <td>A+</td>
+      <td>[https://www.higgins.info/, https://cline.com/]</td>
+      <td>josephbell</td>
+      <td>Jessica Velez</td>
+      <td>F</td>
+      <td>7032 Devin Groves Apt. 845\nNew Emilyville, UT...</td>
+      <td>brandonbright@yahoo.com</td>
+      <td>1911-03-21</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Event organiser</td>
+      <td>Peterson-Johnson</td>
+      <td>609-50-0924</td>
+      <td>97149 Shannon Divide\nNorth Williamberg, UT 09107</td>
+      <td>(82.5767035, -111.439504)</td>
+      <td>O-</td>
+      <td>[https://www.smith.com/]</td>
+      <td>markadams</td>
+      <td>Jennifer Hernandez</td>
+      <td>F</td>
+      <td>Unit 1455 Box 1494\nDPO AA 37368</td>
+      <td>wpeterson@hotmail.com</td>
+      <td>1965-10-06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's down select from some of the data to get a managable set. Below I selected 4 columns of data I'll use to demonstrate Google sheet uploading.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upload_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;job&#39;</span><span class="p">,</span> <span class="s1">&#39;company&#39;</span><span class="p">,</span> <span class="s1">&#39;blood_group&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upload_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>job</th>
+      <th>company</th>
+      <th>blood_group</th>
+      <th>username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Lecturer, higher education</td>
+      <td>Hart PLC</td>
+      <td>A+</td>
+      <td>youngzachary</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Records manager</td>
+      <td>Walker, Patton and George</td>
+      <td>O-</td>
+      <td>nelsonsamantha</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Visual merchandiser</td>
+      <td>Kelley-Simmons</td>
+      <td>A+</td>
+      <td>jefferysmith</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mining engineer</td>
+      <td>Warren, Walsh and Myers</td>
+      <td>A+</td>
+      <td>josephbell</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Event organiser</td>
+      <td>Peterson-Johnson</td>
+      <td>O-</td>
+      <td>markadams</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To start the uploading of values to Sheets, we need to create a list of lists. Each row represents a list of data. We'll combine these into another list for uploading. We then have some parameters to pass to the API. These include the <em>range</em> which can accept the name of the sheet to which you're putting the data or a range of values like <code>A1:B10</code>. For our case, I'll use the sheet name, <code>Sheet1</code>. Another parameter is <code>value_input_option</code>. This lets Sheets infer the data type or represent the information as is. I want it to be represented as is so I'll pass <code>RAW</code> as an input.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">upload_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span>
+<span class="n">values</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">upload_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;range&#39;</span> <span class="p">:</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;values&#39;</span> <span class="p">:</span> <span class="n">values</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">batch_update</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;value_input_option&#39;</span><span class="p">:</span> <span class="s1">&#39;RAW&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span> 
+<span class="p">}</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">values</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+        <span class="n">spreadsheetId</span><span class="o">=</span><span class="n">sheet_id</span><span class="p">,</span>
+        <span class="n">body</span><span class="o">=</span><span class="n">batch_update</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you navigate back to the workbook in your browser, you'll see that the data has made it's way into the sheet just as it was in your dataframe. We'll extract the data we just uploaded to demonstrate getting information from a sheet.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll first need to describe the range of cells from which we'll be pulling data. Google Sheets uses A1 notation. You first provide the sheet name, followed by an ! and then a range of values. Below I have <code>Sheet1!:E101</code>. I'm compensating for column headers. This will extract every value in columns A - E and rows 1 - 101.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_r</span> <span class="o">=</span> <span class="s2">&quot;Sheet1!A1:E101&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because the data returned in the response is provided as a list of lists format, we can pass it directly to the <code>pd.DataFrame()</code> method of pandas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">sheets</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spreadsheetId</span><span class="o">=</span><span class="n">sheet_id</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">_r</span><span class="p">,</span> <span class="n">majorDimension</span><span class="o">=</span><span class="s1">&#39;ROWS&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">execute</span><span class="p">()[</span><span class="s1">&#39;values&#39;</span><span class="p">])</span>
+<span class="p">)</span>
+<span class="n">new_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>job</td>
+      <td>company</td>
+      <td>blood_group</td>
+      <td>username</td>
+      <td>id_number</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Lecturer, higher education</td>
+      <td>Hart PLC</td>
+      <td>A+</td>
+      <td>youngzachary</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Records manager</td>
+      <td>Walker, Patton and George</td>
+      <td>O-</td>
+      <td>nelsonsamantha</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Visual merchandiser</td>
+      <td>Kelley-Simmons</td>
+      <td>A+</td>
+      <td>jefferysmith</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mining engineer</td>
+      <td>Warren, Walsh and Myers</td>
+      <td>A+</td>
+      <td>josephbell</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The column headers are returned as generic data values and are the first data in each column. We can set that row as the column names. The code below accomplishes this for us. We can finally visualize that data in workable fashion.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">new_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">new_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">new_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>job</th>
+      <th>company</th>
+      <th>blood_group</th>
+      <th>username</th>
+      <th>id_number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Lecturer, higher education</td>
+      <td>Hart PLC</td>
+      <td>A+</td>
+      <td>youngzachary</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Records manager</td>
+      <td>Walker, Patton and George</td>
+      <td>O-</td>
+      <td>nelsonsamantha</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Visual merchandiser</td>
+      <td>Kelley-Simmons</td>
+      <td>A+</td>
+      <td>jefferysmith</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mining engineer</td>
+      <td>Warren, Walsh and Myers</td>
+      <td>A+</td>
+      <td>josephbell</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Event organiser</td>
+      <td>Peterson-Johnson</td>
+      <td>O-</td>
+      <td>markadams</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Working with the Google Sheets API can be difficult at times because the documentation isn't the best. However, when you get it down it is <em>extremely</em> useful for collaborating with colleagues who are not as data or code fluent.</p>
+
+</div>
+</div>
+</div>
+
+
+	</div>
+</main>
+	<footer class="footer">
+		<div>Copyright © 2021 Jake Trimble</div>
+		<div class="pelican-info">
+		<address class="address">
+			Proudly powered by Pelican
+		</address><!-- /#about -->
+		<div>Theme by <a href="https://github.com/Trimbljk">@trimbljk</a></div>
+		</div>
+	</footer>
+</body>
+</html>
